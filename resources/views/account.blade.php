@@ -120,8 +120,9 @@
                                 ainsi qu'à vos tweets, followers, etc... <span>Vous serez alors rediriger sur notre page
                                     d'accueil !</span></p>
                             <button type="submit" class="btn btn-outline-danger p-2 btn-lg btn-block" onclick="if(confirm('Voulez-vous vraiment supprimer votre compte ?')){
-                                            return alert('Le post a bien été supprimer');}else{ }">Supprimer mon
+                                            return true;}else{ return false;}">Supprimer mon
                                 compte</button>
+
                         </div>
 
                 </div>

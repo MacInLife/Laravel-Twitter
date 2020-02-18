@@ -25,11 +25,11 @@
             <div class="d-flex">
 
                 <div class="card mr-2 w-75">
-                    <div class="card-header">Vos tweets</div>
+                    <div class="card-header">Tweets</div>
                     <div class="card-body">
                         @if($posts)
                         @foreach ($posts as $post)
-                        <form action="{{ route('destroy.post', $post->id) }}" method="DELETE">
+                        <form action="{{route('destroy.post', $post->id)}}" method="DELETE" id="myform">
                             @csrf
                             <!-- method('DELETE') -->
                             <div class="border-bottom mb-2 pb-2">
@@ -43,9 +43,8 @@
                                 </div>
                                 <div class="d-flex">
                                     <H5 class="font-weight-bold mr-auto">{{$post->user->name}}</H5>
-                                    <button type="submit" class="btn btn-outline-danger p-2"
-                                        onclick="if(confirm('Voulez-vous vraiment supprimer ce post ?')){
-                                            return alert('Le post a bien été supprimer');}else{ return('home');}">Supprimer</button>
+                                    <button type="submit" class="btn btn-outline-danger p-2" onclick="if(confirm('Voulez-vous vraiment supprimer ce post ?')){
+                                            return true;}else{ return false;}">Supprimer</button>
                                 </div>
                                 <div class="d-flex">
                                     <p class="mr-auto w-70 text-info">

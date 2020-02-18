@@ -22,10 +22,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
-    <div id="app">
+<body style="
+    background: url(./img/pile-3d-twitter-logos_1379-879.jpg);
+    background-repeat: no-repeat;
+    background: cover;
+    background-size: cover;">
+    <div id=" app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class=" container ">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Twitter Laravel') }}
                 </a>
