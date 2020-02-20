@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index(Post $post, User $user)
     {
         //
-        $posts = $post->orderBy('id', 'DESC')->paginate(2);
+        $posts = $post->orderBy('id', 'DESC')->paginate(4);
         $users = $user->orderBy('id', 'DESC')->get();
 
         //Retourne la view des posts
@@ -104,12 +104,15 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Post $post)
+    public function destroy($id, Post $post, Request $request)
     {
         //
         $p = $post->find($id);
+       // $p->user_id = $request->user_id;
+       if (Auth::check()) {
         $p->delete($id);
         return redirect('home')->withOk("Le post " . $p->text . " a été supprimé.");
         //->withOk("Le post " . $p->text . " a été supprimé.");
+        }
     }
 }

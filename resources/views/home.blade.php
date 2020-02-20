@@ -25,6 +25,7 @@
                     <div class="collapse navbar-collapse bg-white p-2" id="navbarSupportedContent">
                         <div class="content p-2">
                             @foreach ($users as $user)
+                            @if ($user->name != Auth::user()->name)
                             <div class="card-body d-flex p-2">
                                 <div class="mr-2 float-left" style="width:80px;"><img
                                         class="m-auto rounded img-thumbnail" src="{{$user->getAvatar()}}" width="100%"
@@ -36,6 +37,7 @@
                                         aria-pressed="true">Follow</a>
                                 </div>
                             </div>
+                            @endif
                             @endforeach
                         </div>
                     </div>
@@ -63,8 +65,10 @@
                                 </div>
                                 <div class="d-flex">
                                     <H5 class="font-weight-bold mr-auto">{{$post->user->name}}</H5>
+                                    @if ($post->user->name === Auth::user()->name)
                                     <button type="submit" class="btn btn-outline-danger p-2" onclick="if(confirm('Voulez-vous vraiment supprimer ce post ?')){
                                             return true;}else{ return false;}">Supprimer</button>
+                                    @endif
                                 </div>
                                 <div class="d-flex">
                                     <p class="mr-auto w-70 text-info">
