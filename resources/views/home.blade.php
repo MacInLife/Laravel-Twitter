@@ -25,7 +25,7 @@
                     <div class="collapse navbar-collapse bg-white p-2" id="navbarSupportedContent">
                         <div class="content p-2">
                             @foreach ($users as $user)
-                            @if ($user->name != Auth::user()->name)
+                            @if ($user != Auth::user())
                             <div class="card-body d-flex p-2">
                                 <div class="mr-2 float-left" style="width:80px;"><img
                                         class="m-auto rounded img-thumbnail" src="{{$user->getAvatar()}}" width="100%"
@@ -55,16 +55,22 @@
                             @csrf
                             <!-- method('DELETE') -->
                             <div class="border-bottom mb-2 pb-2">
-                                <div class="mb-2 mr-2 float-left" style="width:80px;"><img
-                                        class="m-auto rounded img-thumbnail" src="{{$post->user->getAvatar()}}"
-                                        width="100%" height="100%">
+                                <div class="mb-2 mr-2 float-left" style="width:80px;"><a href="">
+                                        <img class="m-auto rounded img-thumbnail" src="{{$post->user->getAvatar()}}"
+                                            width="100%" height="100%">
+                                    </a>
                                     <!-- 
                                         Avant en dure : src="./img/tweet1.png"
                                         Après en BDD : src = ./img/$post->user->avatar 
                                     -->
                                 </div>
                                 <div class="d-flex">
-                                    <H5 class="font-weight-bold mr-auto">{{$post->user->name}}</H5>
+                                    <a href="#" class="mr-auto" style="text-decoration: none; color: inherit;">
+                                        <div class="d-flex">
+                                            <H5 class="font-weight-bold pr-2">{{$post->user->name}}</H5>
+                                            <p>@pseudo</p>
+                                        </div>
+                                    </a>
                                     @if ($post->user->name === Auth::user()->name)
                                     <button type="submit" class="btn btn-outline-danger p-2" onclick="if(confirm('Voulez-vous vraiment supprimer ce post ?')){
                                             return true;}else{ return false;}">Supprimer</button>

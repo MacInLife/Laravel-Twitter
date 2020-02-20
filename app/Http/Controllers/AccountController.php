@@ -35,6 +35,16 @@ class AccountController extends Controller
         // $id = Auth::id();
             $user = Auth::user();
             $user->avatar = $path;
+            $user->save();
+        }else if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            $path = '/uploads/avatars/' . $filename;
+            Image::make($avatar)->resize(100, 100)->save(public_path($path));
+            //$user = $user->find($id);
+        // $id = Auth::id();
+            $user = Auth::user();
+            $user->avatar = $path;
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);

@@ -74,7 +74,7 @@
                             <div class="col-md-6">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
-                                    required autocomplete="new-password">
+                                    autocomplete="new-password">
                                 <!-- Bouton masquer/afficher mot de passe -->
                                 <button class="theMask" type="button" onclick="unmask()"
                                     title="Mask/Unmask password to check content">&#128065;</button>
@@ -93,7 +93,7 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" required autocomplete="new-password">
+                                    name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
 

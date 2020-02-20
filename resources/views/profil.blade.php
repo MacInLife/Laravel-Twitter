@@ -16,7 +16,7 @@
                     </div>
                     <div class="p-2 my-auto mr-auto">
                         <H5 class="pt-2">{{ Auth::user()->name }} </H5>
-                        <p class="text-secondary font-italic">Rejoins
+                        <p class="text-secondary font-italic">Rejoint
                             {{Auth::user()->created_at->locale('fr_FR')->diffForHumans()}}</p>
                     </div>
                     <div class="p-2 my-auto">
@@ -38,7 +38,41 @@
             </nav>
             <div class="tab-content card-body bg-white" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    Tweets
+                    @if($posts)
+                    @foreach ($posts as $post)
+                    @if($post->user->name === Auth::user()->name)
+                    <form action="{{route('destroy.post', $post->id)}}" method="DELETE" id="myform">
+                        @csrf
+                        <!-- method('DELETE') -->
+                        <div class="border-bottom mb-2 pb-2">
+                            <div class="mb-2 mr-2 float-left" style="width:80px;"><img
+                                    class="m-auto rounded img-thumbnail" src="{{$post->user->getAvatar()}}" width="100%"
+                                    height="100%">
+                                <!-- 
+                                        Avant en dure : src="./img/tweet1.png"
+                                        Après en BDD : src = ./img/$post->user->avatar 
+                                    -->
+                            </div>
+                            <div class="d-flex">
+                                <H5 class="font-weight-bold mr-auto">{{$post->user->name}}</H5>
+                                @if ($post->user->name === Auth::user()->name)
+                                <button type="submit" class="btn btn-outline-danger p-2" onclick="if(confirm('Voulez-vous vraiment supprimer ce post ?')){
+                                            return true;}else{ return false;}">Supprimer</button>
+                                @endif
+                            </div>
+                            <div class="d-flex">
+                                <p class="mr-auto w-70 text-info">
+                                    {{$post->text }}
+                                </p>
+                                <p class="p-2 text-secondary font-italic">
+                                    {{$post->created_at->locale('fr_FR')->diffForHumans()}}</p>
+                            </div>
+                        </div>
+                    </form>
+                    @endif
+                    @endforeach
+                    @endif
+                    {{$posts->links()}}
                 </div>
                 <div class="tab-pane fade bg-white" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     Followers

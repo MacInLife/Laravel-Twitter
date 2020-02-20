@@ -21,10 +21,7 @@ Route::get('/', function () {
 Route::get('/home', 'PostController@index')->name('home');
 //Route::get('/home', 'UserController@index')->name('home');
 
-
-Route::get('/profil', function () {
-    return view('profil');
-})->name('profil');
+Route::get('/profil', 'ProfilController@index')->name('profil');
 
 //Route concernant les tweets
 //Route de la méthode post tweet
@@ -36,7 +33,7 @@ Route::get('/home/{id}', 'PostController@destroy')->middleware('auth')->name('de
 //Route de vision du compte
 Route::get('account', 'AccountController@show')->middleware('auth')->name('account');
 //Route d'update du compte
-Route::post('account', 'AccountController@update')->middleware('auth')->name('account.update');
+Route::post('account/{id}', 'AccountController@update')->middleware('auth')->name('account.update');
 //Route de la méthode delete account
 Route::get('/account/{id}', 'AccountController@destroy')->middleware('auth')->name('account.destroy');
 Auth::routes();
