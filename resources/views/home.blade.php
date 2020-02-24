@@ -10,7 +10,7 @@
             <div class="card mb-2">
                 <div class="navbar px-0 bg-light" style="
     border-bottom: 1px solid lightgrey;">
-                    <h6 class=" mt-2 pl-4">Personne que vous pouvez suivre</h6>
+                    <h6 class=" mt-2 pl-4">Personne que vous pouvez suivre ({{count($users)}})</h6>
                     <button class="navbar-toggler mr-4" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -31,8 +31,9 @@
                                         class="m-auto rounded img-thumbnail" src="{{$user->getAvatar()}}" width="100%"
                                         height="100%">
                                 </div>
-                                <p class="mr-auto p-2 my-auto">{{$user->name}}</p>
-                                <div class="p-2 my-auto">
+                                <p class="p-2 my-auto">{{$user->name}}</p>
+                                <p class="my-auto mr-auto">@pseudo</p>
+                                <div class="p-2 my-auto ">
                                     <a href="#" class="btn btn-primary btn-lg" role="button"
                                         aria-pressed="true">Follow</a>
                                 </div>

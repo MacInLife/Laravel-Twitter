@@ -15,7 +15,10 @@
                             height="100%">
                     </div>
                     <div class="p-2 my-auto mr-auto">
-                        <H5 class="pt-2">{{ Auth::user()->name }} </H5>
+                        <div class="d-flex">
+                            <H5 class="font-weight-bold pr-2">{{ Auth::user()->name }} </H5>
+                            <p>@pseudo</p>
+                        </div>
                         <p class="text-secondary font-italic">Rejoint
                             {{Auth::user()->created_at->locale('fr_FR')->diffForHumans()}}</p>
                     </div>
@@ -29,7 +32,8 @@
                 <div class="nav nav-tabs bg-light card-header" id="nav-tab" role="tablist"
                     style="justify-content: space-between;">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                        aria-controls="nav-home" aria-selected="true">Mes tweets ()</a>
+                        aria-controls="nav-home" aria-selected="true">Mes tweets
+                        ({{count($myPosts)}})</a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                         aria-controls="nav-profile" aria-selected="false">Follower ()</a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
@@ -54,14 +58,15 @@
                                     -->
                             </div>
                             <div class="d-flex">
-                                <H5 class="font-weight-bold mr-auto">{{$post->user->name}}</H5>
+                                <H5 class="font-weight-bold  p-2">{{$post->user->name}}</H5>
+                                <p class="mr-auto p-2">@pseudo</p>
                                 @if ($post->user->name === Auth::user()->name)
                                 <button type="submit" class="btn btn-outline-danger p-2" onclick="if(confirm('Voulez-vous vraiment supprimer ce post ?')){
                                             return true;}else{ return false;}">Supprimer</button>
                                 @endif
                             </div>
                             <div class="d-flex">
-                                <p class="mr-auto w-70 text-info">
+                                <p class="mr-auto w-70 text-info p-2">
                                     {{$post->text }}
                                 </p>
                                 <p class="p-2 text-secondary font-italic">
