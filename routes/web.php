@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::get('/home', 'PostController@index')->name('home');
 //Route::get('/home', 'UserController@index')->name('home');
 
-Route::get('/profil', 'ProfilController@index')->name('profil');
+Route::get('/profil/{pseudo}', 'ProfilController@index')->name('profil');
 
 //Route concernant les tweets
 //Route de la méthode post tweet

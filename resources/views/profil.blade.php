@@ -17,7 +17,7 @@
                     <div class="p-2 my-auto mr-auto">
                         <div class="d-flex">
                             <H5 class="font-weight-bold pr-2">{{ Auth::user()->name }} </H5>
-                            <p>{{Auth::user()->pseudo}}</p>
+                            <p>{{$user->pseudo}}</p>
                         </div>
                         <p class="text-secondary font-italic">Rejoint
                             {{Auth::user()->created_at->locale('fr_FR')->diffForHumans()}}</p>

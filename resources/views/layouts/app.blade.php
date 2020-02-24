@@ -78,7 +78,8 @@
                                     style="display: none;">
                                     @csrf
                                 </form>
-                                <a class="dropdown-item" href="{{ route('profil') }}">Profil</a>
+
+                                <a class="dropdown-item" href="{{ route('profil', Auth::user()->pseudo) }}">Profil</a>
                                 <a class="dropdown-item" href="{{ route('account') }}">Compte</a>
                             </div>
 

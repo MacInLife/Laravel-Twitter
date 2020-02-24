@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index(Post $post, User $user)
     {
         //
-        $posts = $post->orderBy('id', 'DESC')->get();
+        $posts = $post->orderBy('id', 'DESC')->paginate(4);
         $users = $user->orderBy('id', 'DESC')->get();
         $allUsers = $user->all()->except(Auth::user()->id);
 

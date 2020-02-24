@@ -87,10 +87,9 @@
                         </div>
                         @endforeach
                         @endif
-
-                        posts->links()
+                        {{$posts->links()}}
                     </div>
-                    <a href="#" id="showMore">Show More</a>
+                    <!--<a href="#" id="showMore">Show More</a>-->
                 </div>
 
                 <div class="card w-50 h-50">
@@ -126,32 +125,3 @@
 </div>
 </div>
 @endsection
-<script>
-    var itemsCount = 0,
-        // itemsMax = 7;
-
-        itemsMax = $('.outer .child').length;
-    $('.outer .child').hide();
-
-    function showNextItems() {
-        var pagination = 4;
-
-        for (var i = itemsCount; i < (itemsCount + pagination); i++) {
-            $('.outer div:eq(' + i + ')').show();
-        }
-
-        itemsCount += pagination;
-
-        if (itemsCount > itemsMax) {
-            $('#showMore').hide();
-        }
-    };
-
-    showNextItems();
-
-    $('#showMore').on('click', function (e) {
-        e.preventDefault();
-        showNextItems();
-    });
-
-</script>
