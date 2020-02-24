@@ -49,47 +49,48 @@
 
                 <div class="card mr-2 w-75">
                     <div class="card-header">Tweets</div>
-                    <div class="card-body">
+                    <div class="card-body outer">
                         @if($posts)
                         @foreach ($posts as $post)
-                        <form action="{{route('destroy.post', $post->id)}}" method="DELETE" id="myform">
-                            @csrf
-                            <!-- method('DELETE') -->
-                            <div class="border-bottom mb-2 pb-2">
-                                <div class="mb-2 mr-2 float-left" style="width:80px;"><a href="">
-                                        <img class="m-auto rounded img-thumbnail" src="{{$post->user->getAvatar()}}"
-                                            width="100%" height="100%">
-                                    </a>
-                                    <!-- 
+                        @csrf
+                        <div class="child border-bottom mb-2 pb-2">
+                            <div class="mb-2 mr-2 float-left" style="width:80px;"><a href="">
+                                    <img class="m-auto rounded img-thumbnail" src="{{$post->user->getAvatar()}}"
+                                        width="100%" height="100%">
+                                </a>
+                                <!-- 
                                         Avant en dure : src="./img/tweet1.png"
                                         Après en BDD : src = ./img/$post->user->avatar 
                                     -->
-                                </div>
-                                <div class="d-flex">
-                                    <a href="#" class="mr-auto" style="text-decoration: none; color: inherit;">
-                                        <div class="d-flex">
-                                            <H5 class="font-weight-bold pr-2">{{$post->user->name}}</H5>
-                                            <p>@pseudo</p>
-                                        </div>
-                                    </a>
+                            </div>
+                            <div class="d-flex">
+                                <a href="#" class="mr-auto" style="text-decoration: none; color: inherit;">
+                                    <div class="d-flex">
+                                        <H5 class="font-weight-bold pr-2">{{$post->user->name}}</H5>
+                                        <p>@pseudo</p>
+                                    </div>
+                                </a>
+                                <form action="{{route('destroy.post', $post->id)}}" method="DELETE" id="myform">
                                     @if ($post->user->name === Auth::user()->name)
                                     <button type="submit" class="btn btn-outline-danger p-2" onclick="if(confirm('Voulez-vous vraiment supprimer ce post ?')){
                                             return true;}else{ return false;}">Supprimer</button>
                                     @endif
-                                </div>
-                                <div class="d-flex">
-                                    <p class="mr-auto w-70 text-info">
-                                        {{$post->text }}
-                                    </p>
-                                    <p class="p-2 text-secondary font-italic">
-                                        {{$post->created_at->locale('fr_FR')->diffForHumans()}}</p>
-                                </div>
+                                </form>
                             </div>
-                        </form>
+                            <div class="d-flex">
+                                <p class="mr-auto w-70 text-info">
+                                    {{$post->text }}
+                                </p>
+                                <p class="p-2 text-secondary font-italic">
+                                    {{$post->created_at->locale('fr_FR')->diffForHumans()}}</p>
+                            </div>
+                        </div>
                         @endforeach
                         @endif
-                        {{$posts->links()}}
+
+                        posts->links()
                     </div>
+                    <a href="#" id="showMore">Show More</a>
                 </div>
 
                 <div class="card w-50 h-50">
@@ -125,3 +126,32 @@
 </div>
 </div>
 @endsection
+<script>
+    var itemsCount = 0,
+        // itemsMax = 7;
+
+        itemsMax = $('.outer .child').length;
+    $('.outer .child').hide();
+
+    function showNextItems() {
+        var pagination = 4;
+
+        for (var i = itemsCount; i < (itemsCount + pagination); i++) {
+            $('.outer div:eq(' + i + ')').show();
+        }
+
+        itemsCount += pagination;
+
+        if (itemsCount > itemsMax) {
+            $('#showMore').hide();
+        }
+    };
+
+    showNextItems();
+
+    $('#showMore').on('click', function (e) {
+        e.preventDefault();
+        showNextItems();
+    });
+
+</script>

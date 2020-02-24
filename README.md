@@ -1,3 +1,70 @@
+# Twitter Laravel
+
+Application de page unique de type Twitter avec Laravel, avec une chronologie se mettant à jour automatiquement, la possibilité de follow/unfollow des utilisateurs et une authentification basique avec Avatar ou non.
+
+## Guide utilisateur
+
+### Page de bienvenue
+
+-   Modification de la page d'accueil basique de Laravel par une page d'accueil avec un design épuré correspondant à notre application.
+
+    -   Bienvenue sur Twitter Laravel
+    -   Un bouton d'inscription (S'inscrire)
+    -   Un bouton d'identification (S'identifier)
+
+![docs/Welcome.jpg](docs/Welcome.jpg)
+
+### Authentification
+
+-   Modification du système d'authentification de Laravel (inscription, connexion) pour utiliser un nom (name) et un nom d'utilisateur ou pseudo (pseudo) avec ou sans avatar (avatar). Un avatar par défault sera utilisé à la création du compte utilisateur et le pseudo ainsi que l'adresse e-mail est unique.
+
+    -   Ex: Avatar - John Do - @johnDo.
+        ![docs/inscription.jpg](docs/inscription.jpg)
+
+        ![docs/login.jpg](docs/login.jpg)
+
+### Page d'accueil
+
+A la création du compte ou à l'identification, nous arrivons sur la page d'accueil de l'application.
+
+-   Un menu de navigation est accessible sur toutes les pages une fois la connexion effectuée avec quelques options :
+    -   Le titre de l'application 'Twitter Laravel' ramenant sur la page de bienvenue.
+    -   Votre nom ou pseudo permettant d'accéder à un sous-menu déroulant comportant les actions suivantes :
+        1. Un bouton de "Se déconnecter" redirigeant l'utilisateur sur la page de bienvenue, en le déconnectant.
+        2. Un bouton "Profil" de redirection vers la page de profil utilisateur.
+        3. Un bouton "Compte" de redirection vers la gestion de votre compte.
+
+Nous pouvons y voir les personnes déjà inscrites et les suivre ou non au besoin.
+
+Nous pouvons également poster des tweets, les visualiser et les supprimer.
+
+//Screen
+![docs/Welcome.jpg](docs/Welcome.jpg)
+
+### Page Compte
+
+La page de gestion du compte est disponible dans le menu de navigation comme expliquer précédemment dans la page d'accueil.
+
+-   Vous y trouverez vos informations de compte avec possibilité de modifier à votre guise, votre avatar, nom, pseudo (tant qu'il reste unique), adresse e-mail, mot de passe.
+    -   Lors d'une modification un message vous averti de la prise en compte de l'action.
+-   Vous pourrez également si vous le souhaitez, supprimer complétement votre compte grâce à la rubrique de "Suppresion définitive de compte" situé en dessous de la gestion du compte.
+    **_`Attention cette action est irréversible !`_**
+    -   Une fois l'action effectué, vous êtes alors redirigé sur la page de bienvenue de l'application, avec un message vous confirmant la suppression de votre compte.
+
+### Page Profil
+
+La page de profil est disponible dans le menu de navigation comme expliqué précédemment dans la page d'accueil.
+Sur celle-ci vous trouverez vos informations de profil.........
+
+## Guide Technique
+
+### Technique
+
+## -
+
+-
+
+<hr>
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
@@ -7,72 +74,16 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## À propos de Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Laravel est un framework d'application web avec une syntaxe expressive et élégante. Nous croyons que le développement doit être une expérience agréable et créative pour être vraiment épanouissant. Laravel simplifie le développement en facilitant les tâches courantes utilisées dans de nombreux projets Web, tels que :
 
--   [Simple, fast routing engine](https://laravel.com/docs/routing).
--   [Powerful dependency injection container](https://laravel.com/docs/container).
--   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
--   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
--   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
--   [Robust background job processing](https://laravel.com/docs/queues).
--   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Moteur de routage simple et rapide](https://laravel.com/docs/routing).
+-   [Conteneur d'injection de dépendance puissant](https://laravel.com/docs/container).
+-   Plusieurs back-ends pour le stockage des [session](https://laravel.com/docs/session) et du [cache](https://laravel.com/docs/cache) storage.
+-   [Base de données ORM](https://laravel.com/docs/eloquent), Expressive, intuitive.
+-   [Migrations de schéma indépendantes de la base de données](https://laravel.com/docs/migrations).
+-   [Traitement robuste des tâches en arrière-plan](https://laravel.com/docs/queues).
+-   [Diffusion d'événements en temps réel](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
--   **[Vehikl](https://vehikl.com/)**
--   **[Tighten Co.](https://tighten.co)**
--   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
--   **[64 Robots](https://64robots.com)**
--   **[Cubet Techno Labs](https://cubettech.com)**
--   **[Cyber-Duck](https://cyber-duck.co.uk)**
--   **[British Software Development](https://www.britishsoftware.co)**
--   **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
--   **[DevSquad](https://devsquad.com)**
--   [UserInsights](https://userinsights.com)
--   [Fragrantica](https://www.fragrantica.com)
--   [SOFTonSOFA](https://softonsofa.com/)
--   [User10](https://user10.com)
--   [Soumettre.fr](https://soumettre.fr/)
--   [CodeBrisk](https://codebrisk.com)
--   [1Forge](https://1forge.com)
--   [TECPRESSO](https://tecpresso.co.jp/)
--   [Runtime Converter](http://runtimeconverter.com/)
--   [WebL'Agence](https://weblagence.com/)
--   [Invoice Ninja](https://www.invoiceninja.com)
--   [iMi digital](https://www.imi-digital.de/)
--   [Earthlink](https://www.earthlink.ro/)
--   [Steadfast Collective](https://steadfastcollective.com/)
--   [We Are The Robots Inc.](https://watr.mx/)
--   [Understand.io](https://www.understand.io/)
--   [Abdel Elrafa](https://abdelelrafa.com)
--   [Hyper Host](https://hyper.host)
--   [Appoly](https://www.appoly.co.uk)
--   [OP.GG](https://op.gg)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Laravel est accessible, puissant et fournit les outils requis pour les grandes applications robustes

@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index(Post $post, User $user)
     {
         //
-        $posts = $post->orderBy('id', 'DESC')->paginate(4);
+        $posts = $post->orderBy('id', 'DESC')->get();
         $users = $user->orderBy('id', 'DESC')->get();
 
         //Retourne la view des posts
