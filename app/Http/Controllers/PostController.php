@@ -18,9 +18,10 @@ class PostController extends Controller
         //
         $posts = $post->orderBy('id', 'DESC')->get();
         $users = $user->orderBy('id', 'DESC')->get();
+        $allUsers = $user->all()->except(Auth::user()->id);
 
         //Retourne la view des posts
-        return view('home', ['posts' => $posts], ['users' => $users]);
+        return view('home', ['posts' => $posts], ['users' => $users , 'allUsers' => $allUsers]);
     }
 
     /**

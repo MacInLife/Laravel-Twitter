@@ -17,7 +17,7 @@
                     <div class="p-2 my-auto mr-auto">
                         <div class="d-flex">
                             <H5 class="font-weight-bold pr-2">{{ Auth::user()->name }} </H5>
-                            <p>@pseudo</p>
+                            <p>{{Auth::user()->pseudo}}</p>
                         </div>
                         <p class="text-secondary font-italic">Rejoint
                             {{Auth::user()->created_at->locale('fr_FR')->diffForHumans()}}</p>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="d-flex">
                                 <H5 class="font-weight-bold  p-2">{{$post->user->name}}</H5>
-                                <p class="mr-auto p-2">@pseudo</p>
+                                <p class="mr-auto p-2">{{$post->user->pseudo}}</p>
                                 @if ($post->user->name === Auth::user()->name)
                                 <button type="submit" class="btn btn-outline-danger p-2" onclick="if(confirm('Voulez-vous vraiment supprimer ce post ?')){
                                             return true;}else{ return false;}">Supprimer</button>

@@ -16,9 +16,10 @@ class ProfilController extends Controller
         //$post->user_id = $request->user_id;
         //SELECT * FROM posts WHERE(user_id = 14)
         //$post->user_id = 14;
-        $myPosts = $post->all();
+        $myPosts = $post->where('user_id', Auth::user()->id)->get();
+     
 
         //Retourne la view des posts
-        return view('profil', ['posts' => $posts], ['myPosts' => $myPosts]);
+        return view('/profil', ['posts' => $posts, 'myPosts' => $myPosts]);
     }
 }
