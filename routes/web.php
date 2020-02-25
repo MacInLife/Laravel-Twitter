@@ -22,6 +22,8 @@ Route::get('/home', 'PostController@index')->name('home');
 //Route::get('/home', 'UserController@index')->name('home');
 
 Route::get('/profil/{pseudo}', 'ProfilController@index')->name('profil');
+// Route::get('/profil/{pseudo}/{following}', 'ProfilController@following')->name('profil.following');
+// Route::get('/profil/{pseudo}/{follower}', 'ProfilController@follower')->name('profil.follower');
 
 //Route concernant les tweets
 //Route de la méthode post tweet

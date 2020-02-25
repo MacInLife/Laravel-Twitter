@@ -43,12 +43,12 @@ class User extends Authenticatable
          }
          return $this->avatar;
     }
-    
+
     public function following(){
         //Relation à plusieurs n à n //table 'follows', follower_id < user_id 
         return $this->belongsToMany(User::class, 'follows','user_id', 'follower_id');
         }
-    Public function followers(){
+    public function followers(){
         //Relation à plusieurs n à n //table 'follows', follower_id > user_id 
         Return $this->belongsToMany(User::class, 'follows', 'follower_id', 'user_id');
         }
