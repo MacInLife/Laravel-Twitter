@@ -58,11 +58,111 @@ Sur celle-ci vous trouverez vos informations de profil.........
 
 ## Guide Technique
 
-### Technique
+### Création du projet
 
-## -
+#### - En invite de commande
 
--
+1. Création du projet avec ou sans authentification (--auth)
+   `laravel new nom_du_projet --auth`
+2. Intégration complète de Bootstrap au projet sans lien CDN
+   a. Installation du composant Bootstrap
+   `composer require laravel/ui --dev`
+   b. Intégration du composants dans le projet
+   `php artisan ui bootstrap --auth`
+   c. Mise à jour des fichiers crée avec l'intégration des class de Bootstrap
+   `npm install && npm run dev`
+
+Le projet doit maintenant être crée avec Bootstrap intégrer !!
+Vérifier l'intégration de Bootstrap en lançant le serveur :
+`php artisan serve`
+Le terminal vous renvoie l'url et le port sur lequel se lance votre projet
+ex par défault: http://127.0.0.1:8000
+
+#### - Intégration Base de Données
+
+3. Créer une BDD vide dans phpMyAdmin (MAMP ou autres)
+   Lui donner le nom du projet exemple "laravel-twitter"
+
+4. Modifier le ".env" du projet en conséquences
+   a. Faire correspondre les données suivantes entre MySQL et votre projet
+   `DB_CONNECTION=mysql`
+   `DB_HOST=localhost;`
+   `DB_PORT=8889`
+   `DB_DATABASE=laravel-twitter`
+   `DB_USERNAME=root`
+   `DB_PASSWORD=root`
+
+b. Modifier la ligne suivante pour les utilisateurs de mamps
+`DB_HOST=localhost;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock`
+
+Votre projet dois désormais être connecter à la base de données, vous pourrez le constatez une fois que vous aurez effectué des migrations dans votre projet.
+
+### Modification du système d'authentification de base de LARAVEL
+
+#### 1. Modification de la migration
+
+La migration se situe dans le dossier "database" puis "migrations"
+
+-   Nom de la migration : année_mois_jour_000000_create_users_table.php
+-   État par défault :
+
+```
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateUsersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('users');
+    }
+}
+```
+
+-   Ajout des données à la migration
+    Le Schema de la function up() correspond aux attributs de la table "Users" de la BDD.
+    Il suffit donc de lui ajouter nos nouveaux attribut, ici nous avons besoin d'un avatar, ainsi qu'un pseudonyme pour l'utlisateur.
+    a. L'avatar peut être nulle car non obligatoire à la création d'un compte
+    `$table->string('avatar')->nullable();`
+
+    b. Le pseudonyme lui doit être unique car il ne peut exister 2 utilisateurs avec le même pseudonyme sous peine de conflit.
+    `$table->string('pseudo')->unique();`
+
+    Pour que nos modifications prennent effet en BDD, il faut lancer la migration.
+
+#### 2. Migration de la table des "Users"
+
+-   Lancer la migration dans la BDD
+    `php artisan migrate`
+
+    Si dans votre BDD, les attributs "avatar" et "pseudo" ont été ajouté cela signifie que votre BDD est bien configuré avec votre projet.
+    Sinon un message d'erreur serait apparu.
 
 <hr>
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
