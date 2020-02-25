@@ -38,8 +38,7 @@ Nous pouvons y voir les personnes déjà inscrites et les suivre ou non au besoi
 
 Nous pouvons également poster des tweets, les visualiser et les supprimer.
 
-//Screen
-![docs/Welcome.jpg](docs/Welcome.jpg)
+![docs/accueil.png](docs/accueil.png)
 
 ### Page Compte
 
@@ -50,6 +49,8 @@ La page de gestion du compte est disponible dans le menu de navigation comme exp
 -   Vous pourrez également si vous le souhaitez, supprimer complétement votre compte grâce à la rubrique de "Suppresion définitive de compte" situé en dessous de la gestion du compte.
     **_`Attention cette action est irréversible !`_**
     -   Une fois l'action effectué, vous êtes alors redirigé sur la page de bienvenue de l'application, avec un message vous confirmant la suppression de votre compte.
+
+![docs/compte.jpg](docs/compte.jpg)
 
 ### Page Profil
 
@@ -63,7 +64,7 @@ Sur celle-ci vous trouverez vos informations de profil :
 En cliquant sur le nom d'un utilisateur, vous avez la possibilité de voir son profil.
 
 //Screen
-![docs/Welcome.jpg](docs/Welcome.jpg)
+![docs/profil.png](docs/profil.png)
 
 ## Guide Technique
 
@@ -72,20 +73,32 @@ En cliquant sur le nom d'un utilisateur, vous avez la possibilité de voir son p
 #### - En invite de commande
 
 1. Création du projet avec ou sans authentification (--auth)
-   `laravel new nom_du_projet --auth`
+    ```
+    laravel new nom_du_projet --auth
+    ```
 2. Intégration complète de Bootstrap au projet sans lien CDN
     1. Installation du composant Bootstrap
-       `composer require laravel/ui --dev`
+        ```
+        composer require laravel/ui --dev
+        ```
     2. Intégration du composants dans le projet
-       `php artisan ui bootstrap --auth`
+        ```
+        php artisan ui bootstrap --auth
+        ```
     3. Mise à jour des fichiers crée avec l'intégration des class de Bootstrap
-       `npm install && npm run dev`
+        ```
+        npm install && npm run dev
+        ```
 
 Le projet doit maintenant être crée avec Bootstrap intégrer !!
 Vérifier l'intégration de Bootstrap en lançant le serveur :
-`php artisan serve`
+
+```
+php artisan serve
+```
+
 Le terminal vous renvoie l'url et le port sur lequel se lance votre projet
-ex par défault: http://127.0.0.1:8000
+ex par défault: **http://127.0.0.1:8000**
 
 #### - Intégration Base de Données
 
@@ -169,17 +182,26 @@ class CreateUsersTable extends Migration
     Il suffit donc de lui ajouter nos nouveaux attribut, ici nous avons besoin d'un avatar, ainsi qu'un pseudonyme pour l'utlisateur.
 
     1. L'avatar peut être nulle car non obligatoire à la création d'un compte
-       `$table->string('avatar')->nullable();`
+
+    ```
+       $table->string('avatar')->nullable();
+    ```
 
     2. Le pseudonyme lui doit être unique car il ne peut exister 2 utilisateurs avec le même pseudonyme sous peine de conflit.
-       `$table->string('pseudo')->unique();`
+
+    ```
+       $table->string('pseudo')->unique();
+    ```
 
     Pour que nos modifications prennent effet en BDD, il faut lancer la migration.
 
 #### 2. Migration de la table des "Users"
 
 -   Lancer la migration dans la BDD
-    `php artisan migrate`
+
+    ```
+    php artisan migrate
+    ```
 
     Si dans votre BDD, les attributs "avatar" et "pseudo" ont été ajouté cela signifie que votre BDD est bien configuré avec votre projet.
     Sinon un message d'erreur serait apparu.
@@ -249,8 +271,37 @@ class CreateUsersTable extends Migration
 
 ![docs/HTMLformPseudo.png](docs/HTMLformPseudo.png)
 
+Un utilisateurs peut désormais être crée avec un avatar et un pseudonyme !
+
+#### 6. Avatar non obligatoire à la création du compte
+
+-   Dans le controller "RegisterController", ajouter ceci à la fonction create :
+
+```
+    $request = app('request');
+        $path = null;
+
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            $path = '/uploads/avatars/' . $filename;
+            Image::make($avatar)->resize(100, 100)->save(public_path($path));
+        }
+```
+
+-   Dans le modèle "User.php", créer une fonction pour récuperer l'avatar
+
+```
+  public function getAvatar() {
+         if (!$this->avatar) {
+             return '/img/avatar.png';
+         }
+         return $this->avatar;
+    }
+```
+
 <hr>
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+    <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -273,6 +324,9 @@ Laravel est un framework d'application web avec une syntaxe expressive et élég
 
 Laravel est accessible, puissant et fournit les outils requis pour les grandes applications robustes
 
+````
+
 ```
 
 ```
+````
