@@ -12,7 +12,7 @@ class ProfilController extends Controller
     public function index($pseudo, Post $post, Request $request, User $user)
     {
         //
-        $posts = $post->orderBy('id', 'DESC')->paginate(4);
+        $posts = $post->orderBy('id', 'DESC')->get();
         //$post->user_id = $request->user_id;
         //SELECT * FROM posts WHERE(user_id = 14)
         //$post->user_id = 14;

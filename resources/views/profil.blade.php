@@ -84,7 +84,6 @@
                     @endif
                     @endforeach
                     @endif
-                    {{$posts->links()}}
                 </div>
                 <div class="tab-pane fade bg-white" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     Followers
