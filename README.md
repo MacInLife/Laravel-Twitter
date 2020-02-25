@@ -109,6 +109,12 @@ ex par défault: http://127.0.0.1:8000
        `DB_HOST=localhost;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock`
 
 Votre projet dois désormais être connecter à la base de données, vous pourrez le constatez une fois que vous aurez effectué des migrations dans votre projet.
+Ou bien en créant des utilisateurs en lançant le serveur car sur ce projet l'authentification de base de laravel est installé avec le projet et donc fonctionnel :
+`php artisan serve`
+
+Si dans votre BDD, vous pouvez voir les utilisateurs crée, c'est que la connexion est correctement effectué.
+
+**_`Attention à chaque modification du fichier ".env", il faut relancer le serveur !`_**
 
 ### Modification du système d'authentification de base de LARAVEL
 
@@ -178,6 +184,71 @@ class CreateUsersTable extends Migration
     Si dans votre BDD, les attributs "avatar" et "pseudo" ont été ajouté cela signifie que votre BDD est bien configuré avec votre projet.
     Sinon un message d'erreur serait apparu.
 
+#### 3. Modification du Controller des "Users" ici "RegisterController"
+
+-   Dans la méthode create : Ajout de la ligne 'avatar' et 'pseudo'
+
+```
+     return User::create([
+            'avatar' => $path,
+            'name' => $data['name'],
+            'pseudo' => $data['pseudo'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+```
+
+-   Dans la fonction validator : Ajout de la ligne 'pseudo'
+
+```
+   return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'pseudo' => ['required', 'string', 'alpha_num', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+```
+
+#### 4. Modification du Modèle "Users.php"
+
+-   Modification de la variable \$fillable avec 'avatar'+'pseudo' :
+
+```
+  protected $fillable = [
+        'avatar','name','pseudo', 'email', 'password',
+    ];
+```
+
+#### 5. Modification de la vue (views/auth) "register.blade.php"
+
+-   Ajout dans le formulaire existant pour l'avatar et le pseudo :
+
+1. d'un label : ex("avatar");
+2. d'un champs de saisie (input) de type text pour le pseudo et de type file pour l'avatar;
+
+```
+<!-- Ajout de l'avatar -->
+                        <div class="form-group row">
+                            <label for="avatar" class="col-md-4 col-form-label text-md-right">{{ __('Avatar') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="file" id="avatar"
+                                    class="form-control @error('avatar') is-invalid @enderror" name="avatar"
+                                    accept="image/png, image/jpeg" value="{{ old('avatar') }}" autocomplete="avatar"
+                                    autofocus onclick="changeImage();" value="">
+
+                                @error('nom')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <!-- Fin ajout de l'avatar -->
+```
+
+![docs/HTMLformPseudo.png](docs/formPseudo.png)
+
 <hr>
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
@@ -201,3 +272,7 @@ Laravel est un framework d'application web avec une syntaxe expressive et élég
 -   [Diffusion d'événements en temps réel](https://laravel.com/docs/broadcasting).
 
 Laravel est accessible, puissant et fournit les outils requis pour les grandes applications robustes
+
+```
+
+```
