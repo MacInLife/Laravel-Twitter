@@ -306,17 +306,17 @@ Un utilisateur peut désormais être crée avec un avatar et un pseudonyme !
 -   Création d'un seeder de fausse données pour les tweets (post)
 
 ```
-php artisan make:seed PostsTablesSeeder
+php artisan make:seed PostsTableSeeder
 ```
 
-Le fichier en question "PostsTablesSeeder.php" se crée dans le dossier "database/seeds" avec la composition suivantes :
+Le fichier en question "PostsTableSeeder.php" se crée dans le dossier "database/seeds" avec la composition suivantes :
 
 ```
 <?php
 
 use Illuminate\Database\Seeder;
 
-class PostsTablesSeeder extends Seeder
+class PostsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
