@@ -63,7 +63,6 @@ Sur celle-ci vous trouverez vos informations de profil :
 
 En cliquant sur le nom d'un utilisateur, vous avez la possibilité de voir son profil.
 
-//Screen
 ![docs/profil.png](docs/profil.png)
 
 ## Guide Technique
@@ -271,7 +270,7 @@ class CreateUsersTable extends Migration
 
 ![docs/HTMLformPseudo.png](docs/HTMLformPseudo.png)
 
-Un utilisateurs peut désormais être crée avec un avatar et un pseudonyme !
+Un utilisateur peut désormais être crée avec un avatar et un pseudonyme !
 
 #### 6. Avatar non obligatoire à la création du compte
 
@@ -300,8 +299,83 @@ Un utilisateurs peut désormais être crée avec un avatar et un pseudonyme !
     }
 ```
 
+### Intégration de Seeders (fausse données)
+
+#### - En invite de commande
+
+-   Création d'un seeder de fausse données pour les tweets (post)
+
+```
+php artisan make:seed PostsTablesSeeder
+```
+
+Le fichier en question "PostsTablesSeeder.php" se crée dans le dossier "database/seeds" avec la composition suivantes :
+
+```
+<?php
+
+use Illuminate\Database\Seeder;
+
+class PostsTablesSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+    }
+}
+```
+
+-   Modifier le seeder pour y ajouter les fausses données qui nous intéresse :
+
+    1. Ajouter la méthode Faker dans les "use" (import)
+
+    ```
+    //Add use Faker
+    use Faker\Factory as Faker;
+    ```
+
+    2. Ajouter l'appel du modèle de gestion des posts "Post.php"
+
+    ```
+    use App\Post;
+    ```
+
+    3. Dans la fonction run, y ajouter les attributs avec les fausses données
+
+    ```
+      //Permet de générer des fausses données 'fr_FR' en français
+         $faker = Faker::create('fr_FR');
+
+         //Boucle de création des faux posts
+         for ($i = 0; $i < 10; $i++) {
+             $post = new Post();
+             $post->text = $faker->text();
+             $post->user_id = $faker->numberBetween(1, 9);
+             $post->save();
+         }
+    ```
+
+-   Une fois ce fichier créer et modifier correctement, il faut l'appeler dans le fichier "DatabaseSeeder.php"
+
+    ```
+    $this->call(PostsTableSeeder::class);
+    ```
+
+-   Lancer la création des fausses données :
+
+    ```
+    php artisan db:seed
+    ```
+
+Vous pouvez vérifier que vos données ont été crée dans votre BDD !
+
 <hr>
-    <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -325,6 +399,14 @@ Laravel est un framework d'application web avec une syntaxe expressive et élég
 Laravel est accessible, puissant et fournit les outils requis pour les grandes applications robustes
 
 ````
+
+```
+
+```
+
+```
+
+```
 
 ```
 

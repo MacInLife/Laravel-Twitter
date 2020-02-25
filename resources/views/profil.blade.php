@@ -50,7 +50,6 @@
                     @if($posts)
                     @foreach ($posts as $post)
                     @if($post->user->name === $user->name)
-
                     @csrf
                     <div class="border-bottom mb-2 pb-2 pt-2">
                         <div class="mb-2 mr-2 float-left" style="width:80px;">
