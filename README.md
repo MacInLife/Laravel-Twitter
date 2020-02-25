@@ -247,7 +247,7 @@ class CreateUsersTable extends Migration
                         <!-- Fin ajout de l'avatar -->
 ```
 
-![docs/HTMLformPseudo.png](docs/formPseudo.png)
+![docs/HTMLformPseudo.png](docs/HTMLformPseudo.png)
 
 <hr>
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
