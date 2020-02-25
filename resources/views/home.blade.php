@@ -27,12 +27,20 @@
                             @foreach ($users as $user)
                             @if ($user != Auth::user())
                             <div class="card-body d-flex p-2">
-                                <div class="mr-2 float-left" style="width:80px;"><img
-                                        class="m-auto rounded img-thumbnail" src="{{$user->getAvatar()}}" width="100%"
-                                        height="100%">
+
+                                <div class="mr-2 float-left" style="width:80px;">
+                                    <a href="{{ route('profil', $user->pseudo) }}">
+                                        <img class="m-auto rounded img-thumbnail" src="{{$user->getAvatar()}}"
+                                            width="100%" height="100%">
+                                    </a>
                                 </div>
-                                <p class="p-2 my-auto">{{$user->name}}</p>
-                                <p class="my-auto mr-auto">{{$user->pseudo}}</p>
+                                <a href="{{ route('profil', $user->pseudo) }}" class="my-auto mr-auto"
+                                    style="text-decoration: none; color: inherit;">
+                                    <div class="d-flex">
+                                        <p class="p-2 my-auto">{{$user->name}}</p>
+                                        <p class="my-auto">{{$user->pseudo}}</p>
+                                    </div>
+                                </a>
                                 <div class="p-2 my-auto ">
                                     <a href="#" class="btn btn-primary btn-lg" role="button"
                                         aria-pressed="true">Follow</a>
@@ -54,7 +62,8 @@
                         @foreach ($posts as $post)
                         @csrf
                         <div class="child border-bottom mb-2 pb-2">
-                            <div class="mb-2 mr-2 float-left" style="width:80px;"><a href="">
+                            <div class="mb-2 mr-2 float-left" style="width:80px;"><a
+                                    href="{{ route('profil', $post->user->pseudo) }}">
                                     <img class="m-auto rounded img-thumbnail" src="{{$post->user->getAvatar()}}"
                                         width="100%" height="100%">
                                 </a>
@@ -64,7 +73,8 @@
                                     -->
                             </div>
                             <div class="d-flex">
-                                <a href="#" class="mr-auto" style="text-decoration: none; color: inherit;">
+                                <a href="{{ route('profil', $post->user->pseudo) }}" class="mr-auto"
+                                    style="text-decoration: none; color: inherit;">
                                     <div class="d-flex">
                                         <H5 class="font-weight-bold pr-2">{{$post->user->name}}</H5>
                                         <p>{{$post->user->pseudo}}</p>

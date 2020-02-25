@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
@@ -112,7 +113,7 @@ class PostController extends Controller
        // $p->user_id = $request->user_id;
        if (Auth::check()) {
         $p->delete($id);
-        return redirect('home')->withOk("Le post " . $p->text . " a été supprimé.");
+        return redirect::back()->withOk("Le post " . $p->text . " a été supprimé.");
         //->withOk("Le post " . $p->text . " a été supprimé.");
         }
     }
