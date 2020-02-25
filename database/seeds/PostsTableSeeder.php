@@ -21,7 +21,7 @@ class PostsTableSeeder extends Seeder
          //Boucle de création des faux posts
          for ($i = 0; $i < 10; $i++) {
              $post = new Post();
-             $post->text = $faker->text(255);
+             $post->text = $faker->text(20);
              $post->user_id = $faker->numberBetween(1, 5);
              $post->save();
          }

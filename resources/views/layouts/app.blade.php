@@ -23,9 +23,8 @@
 </head>
 
 <body style="
-    background: url(./img/pile-3d-twitter-logos_1379-879.jpg);
+    background: url(../img/pile-3d-twitter-logos_1379-879.jpg);
     background-repeat: no-repeat;
-    background: cover;
     background-size: cover;">
     <div id=" app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
