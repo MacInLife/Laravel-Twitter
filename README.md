@@ -397,18 +397,3 @@ Laravel est un framework d'application web avec une syntaxe expressive et élég
 -   [Diffusion d'événements en temps réel](https://laravel.com/docs/broadcasting).
 
 Laravel est accessible, puissant et fournit les outils requis pour les grandes applications robustes
-
-````
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-````
