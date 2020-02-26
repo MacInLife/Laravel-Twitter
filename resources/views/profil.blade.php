@@ -37,15 +37,17 @@
                 <div class="nav nav-tabs bg-light card-header p-0" id="nav-tab" role="tablist"
                     style="justify-content: space-between;">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                        aria-controls="nav-home" aria-selected="true">Mes tweets
+                        aria-controls="nav-home" aria-selected="true">Tweets
                         ({{count($myPosts)}})</a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                        aria-controls="nav-profile" aria-selected="false">Follower ()</a>
+                        aria-controls="nav-profile" aria-selected="false">Follower ({{count($myFollowers)}})</a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-                        aria-controls="nav-contact" aria-selected="false">Following ()</a>
+                        aria-controls="nav-contact" aria-selected="false">Following ({{count($myFollowing)}})</a>
                 </div>
             </nav>
             <div class="tab-content card-body bg-white" id="nav-tabContent">
+
+                <!-- Partie Tweets = Tweets du profil de la personne -->
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     @if($posts)
                     @foreach ($posts as $post)
@@ -85,11 +87,61 @@
                     @endforeach
                     @endif
                 </div>
+
+                <!-- Partie Followers = personne que je suis -->
                 <div class="tab-pane fade bg-white" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    Followers
+                    @foreach($user->following as $following)
+                    @csrf
+                    <div class="card-body d-flex p-0 py-2">
+                        <div class="mr-2 float-left" style="width:80px;">
+                            <a href="{{ route('profil', $following->pseudo) }}">
+                                <img id="user-avatar" class="m-auto rounded img-thumbnail"
+                                    src="{{$following->getAvatar()}}" width="100%" height="100%">
+                            </a>
+                        </div>
+                        <div class="p-2 my-auto mr-auto">
+                            <a href="{{ route('profil', $following->pseudo) }}" class="my-auto mr-auto"
+                                style="text-decoration: none; color: inherit;">
+                                <div class="d-flex">
+                                    <H5 class="font-weight-bold pr-2"> {{ $following->name }} </H5>
+                                    <p>{{$following->pseudo}}</p>
+                                </div>
+                            </a>
+                            <p class="text-secondary font-italic">Relation crée
+                                {{$following->created_at->locale('fr_FR')->diffForHumans()}}</p>
+                        </div>
+                        <div class="p-2 my-auto">
+                            <a href="#" class="btn btn-info btn-lg text-white" role="button"
+                                aria-pressed="true">UnFollow</a>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
+
+                <!-- Partie Following = personne qui me suivent -->
                 <div class="tab-pane fade bg-white" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    Followings
+                    @foreach($user->followers as $follower)
+                    @csrf
+                    <div class="card-body d-flex p-0 py-2">
+                        <div class="mr-2 float-left" style="width:80px;">
+                            <a href="{{ route('profil', $follower->pseudo) }}">
+                                <img id="user-avatar" class="m-auto rounded img-thumbnail"
+                                    src="{{$follower->getAvatar()}}" width="100%" height="100%">
+                            </a>
+                        </div>
+                        <div class="p-2 my-auto mr-auto">
+                            <a href="{{ route('profil', $follower->pseudo) }}" class="my-auto mr-auto"
+                                style="text-decoration: none; color: inherit;">
+                                <div class="d-flex">
+                                    <H5 class="font-weight-bold pr-2"> {{ $follower->name }} </H5>
+                                    <p>{{$follower->pseudo}}</p>
+                                </div>
+                            </a>
+                            <p class="text-secondary font-italic">Relation crée
+                                {{$follower->created_at->locale('fr_FR')->diffForHumans()}}</p>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

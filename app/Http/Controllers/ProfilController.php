@@ -21,17 +21,31 @@ class ProfilController extends Controller
         $user = $user->where('pseudo', $pseudo)->first();
         
         $myPosts = $post->where('user_id', $user->id)->get();
-     
+        $myFollowers = $user->following()->get();
+        $myFollowing = $user->followers()->get();
 
         //Retourne la view des posts
-        return view('/profil', ['posts' => $posts, 'myPosts' => $myPosts, 'user' => $user]);
+        return view('/profil', ['posts' => $posts, 'myPosts' => $myPosts, 'user' => $user, 'myFollowers' => $myFollowers, 'myFollowing' => $myFollowing ]);
     }
 
     public function following($pseudo, User $user, Request $request)
     {
         // $user = $user->where('pseudo', $pseudo)->first();
         // //Création de la relation suivre un user
-        // $follow = new Follow;
+         //$follow = new Follow;
+        // //$follow->user_id = 3;
+        // $follow->user_id = $request->user_id;
+        // //dd($follow);
+        // //Sauvegarde de la relation
+        // $follow->save();
+        // //Redirection
+        // return redirect::back()->withOk("Vous suivez désormais" . $follow->user->name . "!");
+    }
+    public function followers($pseudo, User $user, Request $request)
+    {
+        // $user = $user->where('pseudo', $pseudo)->first();
+        // //Création de la relation suivre un user
+         //$follow = new Follow;
         // //$follow->user_id = 3;
         // $follow->user_id = $request->user_id;
         // //dd($follow);
