@@ -10,7 +10,8 @@
             <div class="card mb-2">
                 <div class="navbar px-0 bg-light" style="
     border-bottom: 1px solid lightgrey;">
-                    <h6 class=" mt-2 pl-4">Personne que vous pouvez suivre ({{count($allUsers)}})</h6>
+                    <h6 class=" mt-2 pl-4">Personne que vous pouvez suivre ({{count($allUsers)}})
+                    </h6>
                     <button class="navbar-toggler mr-4" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">

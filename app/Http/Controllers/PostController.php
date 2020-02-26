@@ -20,6 +20,7 @@ class PostController extends Controller
         $posts = $post->orderBy('id', 'DESC')->paginate(4);
         $users = $user->orderBy('id', 'DESC')->get();
         $allUsers = $user->all()->except(Auth::user()->id);
+        //$myFollowers = $user->following()->get();
 
         //Retourne la view des posts
         return view('home', ['posts' => $posts], ['users' => $users , 'allUsers' => $allUsers]);
