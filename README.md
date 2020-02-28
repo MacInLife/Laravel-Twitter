@@ -143,8 +143,6 @@ La migration se situe dans le dossier "database" puis "migrations"
 -   Nom de la migration : année_mois_jour_000000_create_users_table.php
 -   État par défault :
 
-<details>
-<summary>Voir</summary>
 ```
     <?php
 
@@ -183,8 +181,7 @@ La migration se situe dans le dossier "database" puis "migrations"
         }
 
     }
-
-</details>
+```
 
 -   Ajout des données à la migration
     Le Schema de la function up() correspond aux attributs de la table "Users" de la BDD.
@@ -263,11 +260,10 @@ protected \$fillable = [
 1. d'un label : ex("avatar");
 2. d'un champs de saisie (input) de type text pour le pseudo et de type file pour l'avatar;
 
-    <details>
-    <summary>Voir le code</summary>
+<details>
+<summary>Voir le code</summary>
 
 ```
-
 <!-- Ajout de l'avatar -->
 
                         <div class="form-group row">
