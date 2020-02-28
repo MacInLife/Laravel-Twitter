@@ -286,7 +286,12 @@ protected \$fillable = [
 
 ```
 
-![docs/HTMLformPseudo.png](docs/HTMLformPseudo.png)
+</details>
+
+3. Même chose pour le pseudo !
+    <details>
+    <summary>Voir le code</summary>
+    ![docs/HTMLformPseudo.png](docs/HTMLformPseudo.png)
 
 </details>
 
@@ -322,6 +327,8 @@ if (!$this->avatar) {
 }
 
 ```
+
+Désormais votre création d'utilisateur doit être fonctionnel avec les nouveaux paramètres !
 
 ### C. Ajout de la possibilité de modifier le compte Utilisateur du système d'authentification (user) de base de LARAVEL
 
@@ -579,6 +586,10 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 php artisan make:controller AccountController
 
 ```
+
+3. Création de la route (permet l'accès à l'url)
+
+    <hr>
 
 ### Intégration de Seeders (fausse données)
 
