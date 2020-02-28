@@ -16,8 +16,9 @@ class PostController extends Controller
      */
     public function index(Post $post, User $user)
     {
-        //
+        //Post de tout le monde
         //$posts = $post->orderBy('id', 'DESC')->where('user_id', Auth::user()->id)->paginate(4);
+        //Post de la personne connecter + des gens que je suis
         $posts = $post
         ->whereIn('user_id', Auth::user()->followers()->pluck('user_id'))
         ->orWhere('user_id', Auth::user()->id)
@@ -25,13 +26,10 @@ class PostController extends Controller
         ->orderBy('id', 'DESC')
         ->paginate(4);
 
+        //Récupère tous les users
         //$users = $user->orderBy('id', 'DESC')->get();
-        //dd(Auth::user()->following()->pluck('follower_id')->toArray());
+        //Récupère tous les users excepter l'user authentifier et les personnes que je suis
         $users = $user->orderBy('id', 'DESC')->get()->except(Auth::user()->id)->except(Auth::user()->following()->pluck('follower_id')->toArray());
-        //$myFollowers = $user->following()->get();
-
-
-       
 
         //Retourne la view des posts
         return view('home', ['posts' => $posts], ['users' => $users]);
