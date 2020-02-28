@@ -2,16 +2,9 @@
 
 Application de page unique de type Twitter avec Laravel, avec une chronologie se mettant à jour automatiquement, la possibilité de follow/unfollow des utilisateurs et une authentification basique avec Avatar ou non.
 
-<details>
-<summary>Click to toggle contents of `code`</summary>
-```
-CODE!
-```
-</details>
+## I - Guide utilisateur
 
-## Guide utilisateur
-
-### Page de bienvenue
+### A. Page de bienvenue
 
 -   Modification de la page d'accueil basique de Laravel par une page d'accueil avec un design épuré correspondant à notre application.
 
@@ -21,7 +14,7 @@ CODE!
 
 ![docs/Welcome.jpg](docs/Welcome.jpg)
 
-### Authentification
+### B. Authentification
 
 -   Modification du système d'authentification de Laravel (inscription, connexion) pour utiliser un nom (name) et un nom d'utilisateur ou pseudo (pseudo) avec ou sans avatar (avatar). Un avatar par défault sera utilisé à la création du compte utilisateur et le pseudo ainsi que l'adresse e-mail est unique.
 
@@ -30,7 +23,7 @@ CODE!
 
         ![docs/login.jpg](docs/login.jpg)
 
-### Page d'accueil
+### C. Page d'accueil
 
 A la création du compte ou à l'identification, nous arrivons sur la page d'accueil de l'application.
 
@@ -47,7 +40,7 @@ Nous pouvons également poster des tweets, les visualiser et les supprimer.
 
 ![docs/accueil.png](docs/accueil.png)
 
-### Page Compte
+### D. Page Compte
 
 La page de gestion du compte est disponible dans le menu de navigation comme expliquer précédemment dans la page d'accueil.
 
@@ -59,7 +52,7 @@ La page de gestion du compte est disponible dans le menu de navigation comme exp
 
 ![docs/compte.jpg](docs/compte.jpg)
 
-### Page Profil
+### E. Page Profil
 
 La page de profil est disponible dans le menu de navigation comme expliqué précédemment dans la page d'accueil.
 Sur celle-ci vous trouverez vos informations de profil :
@@ -72,7 +65,7 @@ En cliquant sur le nom d'un utilisateur, vous avez la possibilité de voir son p
 
 ![docs/profil.png](docs/profil.png)
 
-## Guide Technique
+## II - Guide Technique
 
 Dans ce projet nous avons utilisés le CDN Bootstrap pour gérer le style de nos pages, ainsi que du jquery/javascript utilisé pour certains affichages.
 Pour nos fichiers de vue coder en PHP, nous utilisons "Blade" natif dans les projets LARAVEL.
@@ -80,9 +73,9 @@ Pour nos fichiers de vue coder en PHP, nous utilisons "Blade" natif dans les pro
 -   Définitiion de Blade :
     Blade est le moteur de modélisation simple mais puissant fourni avec Laravel. Contrairement à d'autres moteurs de modèles PHP populaires, Blade ne vous empêche pas d'utiliser du code PHP simple dans vos vues. En fait, toutes les vues Blade sont compilées en code PHP brut et mises en cache jusqu'à ce qu'elles soient modifiées, ce qui signifie que Blade n'ajoute pratiquement pas de surcharge à votre application. Les fichiers de vue de lame utilisent l' extension de fichier et sont généralement stockés dans le répertoire '''..blade.phpresources/views'''
 
-### Création du projet
+### A. Création du projet
 
-#### - En invite de commande
+#### 1 - En invite de commande
 
 1. Création du projet avec ou sans authentification (--auth)
     ```
@@ -112,7 +105,7 @@ php artisan serve
 Le terminal vous renvoie l'url et le port sur lequel se lance votre projet
 ex par défault: **http://127.0.0.1:8000**
 
-#### - Intégration Base de Données
+#### 2 - Intégration Base de Données
 
 3. Créer une BDD vide dans phpMyAdmin (MAMP ou autres).
    Lui donner le nom du projet exemple "laravel-twitter"
@@ -141,7 +134,7 @@ Si dans votre BDD, vous pouvez voir les utilisateurs crée, c'est que la connexi
 
 **_`Attention à chaque modification du fichier ".env", il faut relancer le serveur !`_**
 
-### Modification du système d'authentification (user) de base de LARAVEL
+### B. Modification du système d'authentification (user) de base de LARAVEL
 
 #### 1. Modification de la migration
 
@@ -149,6 +142,7 @@ La migration se situe dans le dossier "database" puis "migrations"
 
 -   Nom de la migration : année_mois_jour_000000_create_users_table.php
 -   État par défault :
+    <details>
 
 ```
 <?php
@@ -188,6 +182,8 @@ class CreateUsersTable extends Migration
     }
 }
 ```
+
+</details>
 
 -   Ajout des données à la migration
     Le Schema de la function up() correspond aux attributs de la table "Users" de la BDD.
@@ -259,6 +255,8 @@ class CreateUsersTable extends Migration
 
 1. d'un label : ex("avatar");
 2. d'un champs de saisie (input) de type text pour le pseudo et de type file pour l'avatar;
+    <details>
+    <summary>Voir le code</summary>
 
 ```
 <!-- Ajout de l'avatar -->
@@ -282,6 +280,8 @@ class CreateUsersTable extends Migration
 ```
 
 ![docs/HTMLformPseudo.png](docs/HTMLformPseudo.png)
+
+</details>
 
 Un utilisateur peut désormais être crée avec un avatar et un pseudonyme !
 
@@ -312,7 +312,7 @@ Un utilisateur peut désormais être crée avec un avatar et un pseudonyme !
     }
 ```
 
-### Ajout de la possibilité de modifier le compte Utilisateur du système d'authentification (user) de base de LARAVEL
+### C. Ajout de la possibilité de modifier le compte Utilisateur du système d'authentification (user) de base de LARAVEL
 
 C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, pseudo, mail, password, etc..)
 
