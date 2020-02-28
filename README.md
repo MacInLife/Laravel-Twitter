@@ -508,7 +508,6 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 
 </details>
 <détails>
-
   <summary> Code du style lié </summary>
 -   Intégration du style spécifique au champs mot de passe
 
