@@ -289,8 +289,10 @@ protected \$fillable = [
 </details>
 
 3. Même chose pour le pseudo !
+
     <details>
     <summary>Voir le code</summary>
+
     ![docs/HTMLformPseudo.png](docs/HTMLformPseudo.png)
 
 </details>
@@ -587,8 +589,10 @@ php artisan make:controller AccountController
 
 ```
 
-3. Création de la route (permet l'accès à l'url)
+--> A suivre ...
 
+3. Création de la route (permet l'accès à l'url)
+   --> A suivre ...
     <hr>
 
 ### Intégration de Seeders (fausse données)
