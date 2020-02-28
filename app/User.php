@@ -52,4 +52,7 @@ class User extends Authenticatable
         //Relation à plusieurs n à n //table 'follows', follower_id > user_id 
         Return $this->belongsToMany(User::class, 'follows', 'follower_id', 'user_id');
         }
+    public function posts() {
+        return $this->hasMany(\App\Post::class, 'user_id');
+    }
 }

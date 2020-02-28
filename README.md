@@ -332,8 +332,8 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 
 <détails>
 
-  <summary> Cliquez ici pour voir l'exemple </summary>
-
+<summary> Cliquez ici pour voir l'exemple </summary>
+<code style="white-space:nowrap;">
 ```
 @extends('layouts.app')
 <title>Twitter Laravel</title>
@@ -483,11 +483,12 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
             </div>
         </div>
     </div>
+
 </div>
 
 @endsection
-```
 
+</code>
 </details>
 
 <détails>
@@ -497,6 +498,7 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 -   Ajout de code JQUERY pour permettre l'affichage dynamique de la vision du mot de passe
 
 ```
+
 <script>
     function unmask() {
         var inputType = document.getElementById('password');
@@ -512,6 +514,7 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
     }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 ```
 
 </details>
@@ -523,6 +526,7 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 -   Intégration du style spécifique au champs mot de passe
 
 ```
+
 <style>
     .theMask {
         border: none;
@@ -557,7 +561,9 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
    Pour créer le controller, il faut taper la commande suivante :
 
 ```
+
 php artisan make:controller AccountController
+
 ```
 
 ### Intégration de Seeders (fausse données)
@@ -567,12 +573,15 @@ php artisan make:controller AccountController
 -   Création d'un seeder de fausse données pour les tweets (post)
 
 ```
+
 php artisan make:seed PostsTableSeeder
+
 ```
 
 Le fichier en question "PostsTableSeeder.php" se crée dans le dossier "database/seeds" avec la composition suivantes :
 
 ```
+
 <?php
 
 use Illuminate\Database\Seeder;

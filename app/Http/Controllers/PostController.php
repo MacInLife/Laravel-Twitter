@@ -17,10 +17,13 @@ class PostController extends Controller
     public function index(Post $post, User $user)
     {
         //
-        $posts = $post->orderBy('id', 'DESC')->paginate(4);
+        $posts = $post->orderBy('id', 'DESC')->where('user_id', Auth::user()->id)->paginate(4);
         $users = $user->orderBy('id', 'DESC')->get();
         $allUsers = $user->all()->except(Auth::user()->id);
         //$myFollowers = $user->following()->get();
+
+        $myPosts = Auth::user()->posts()->get();
+        //dd($myPosts);
 
         //Retourne la view des posts
         return view('home', ['posts' => $posts], ['users' => $users , 'allUsers' => $allUsers]);
