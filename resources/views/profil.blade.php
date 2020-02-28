@@ -90,36 +90,6 @@
 
                 <!-- Partie Followers = personne que je suis -->
                 <div class="tab-pane fade bg-white" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    @foreach($user->following as $following)
-                    @csrf
-                    <div class="card-body d-flex p-0 py-2">
-                        <div class="mr-2 float-left" style="width:80px;">
-                            <a href="{{ route('profil', $following->pseudo) }}">
-                                <img id="user-avatar" class="m-auto rounded img-thumbnail"
-                                    src="{{$following->getAvatar()}}" width="100%" height="100%">
-                            </a>
-                        </div>
-                        <div class="p-2 my-auto mr-auto">
-                            <a href="{{ route('profil', $following->pseudo) }}" class="my-auto mr-auto"
-                                style="text-decoration: none; color: inherit;">
-                                <div class="d-flex">
-                                    <H5 class="font-weight-bold pr-2"> {{ $following->name }} </H5>
-                                    <p>{{$following->pseudo}}</p>
-                                </div>
-                            </a>
-                            <p class="text-secondary font-italic">Relation crée
-                                {{$following->created_at->locale('fr_FR')->diffForHumans()}}</p>
-                        </div>
-                        <div class="p-2 my-auto">
-                            <a href="#" class="btn btn-info btn-lg text-white" role="button"
-                                aria-pressed="true">UnFollow</a>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-
-                <!-- Partie Following = personne qui me suivent -->
-                <div class="tab-pane fade bg-white" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     @foreach($user->followers as $follower)
                     @csrf
                     <div class="card-body d-flex p-0 py-2">
@@ -138,7 +108,37 @@
                                 </div>
                             </a>
                             <p class="text-secondary font-italic">Relation crée
-                                {{$follower->created_at->locale('fr_FR')->diffForHumans()}}</p>
+                                {{$follower->pivot->created_at->locale('fr_FR')->diffForHumans()}}</p>
+                        </div>
+                        <div class="p-2 my-auto">
+                            <a href="#" class="btn btn-info btn-lg text-white" role="button"
+                                aria-pressed="true">UnFollow</a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
+                <!-- Partie Following = personne qui me suivent -->
+                <div class="tab-pane fade bg-white" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    @foreach($user->following as $following)
+                    @csrf
+                    <div class="card-body d-flex p-0 py-2">
+                        <div class="mr-2 float-left" style="width:80px;">
+                            <a href="{{ route('profil', $following->pseudo) }}">
+                                <img id="user-avatar" class="m-auto rounded img-thumbnail"
+                                    src="{{$following->getAvatar()}}" width="100%" height="100%">
+                            </a>
+                        </div>
+                        <div class="p-2 my-auto mr-auto">
+                            <a href="{{ route('profil', $following->pseudo) }}" class="my-auto mr-auto"
+                                style="text-decoration: none; color: inherit;">
+                                <div class="d-flex">
+                                    <H5 class="font-weight-bold pr-2"> {{ $following->name }} </H5>
+                                    <p>{{$following->pseudo}}</p>
+                                </div>
+                            </a>
+                            <p class="text-secondary font-italic">Relation crée
+                                {{$following->pivot->created_at->locale('fr_FR')->diffForHumans()}}</p>
                         </div>
                     </div>
                     @endforeach

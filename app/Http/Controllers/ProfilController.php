@@ -21,8 +21,8 @@ class ProfilController extends Controller
         $user = $user->where('pseudo', $pseudo)->first();
         
         $myPosts = $post->where('user_id', $user->id)->get();
-        $myFollowers = $user->following()->get();
-        $myFollowing = $user->followers()->get();
+        $myFollowing = $user->following()->get();
+        $myFollowers = $user->followers()->get();
 
         //Retourne la view des posts
         return view('/profil', ['posts' => $posts, 'myPosts' => $myPosts, 'user' => $user, 'myFollowers' => $myFollowers, 'myFollowing' => $myFollowing ]);

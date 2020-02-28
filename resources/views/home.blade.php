@@ -10,7 +10,7 @@
             <div class="card mb-2">
                 <div class="navbar px-0 bg-light" style="
     border-bottom: 1px solid lightgrey;">
-                    <h6 class=" mt-2 pl-4">Personne que vous pouvez suivre ({{count($allUsers)}})
+                    <h6 class=" mt-2 pl-4">Personne que vous pouvez suivre ({{$users->count()}})
                     </h6>
                     <button class="navbar-toggler mr-4" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -26,7 +26,7 @@
                     <div class="collapse navbar-collapse bg-white p-2" id="navbarSupportedContent">
                         <div class="content p-2">
                             @foreach ($users as $user)
-                            @if ($user != Auth::user())
+
                             <div class="card-body d-flex p-2">
 
                                 <div class="mr-2 float-left" style="width:80px;">
@@ -47,7 +47,7 @@
                                         aria-pressed="true">Follow</a>
                                 </div>
                             </div>
-                            @endif
+
                             @endforeach
                         </div>
                     </div>
