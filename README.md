@@ -75,6 +75,9 @@ Pour nos fichiers de vue coder en PHP, nous utilisons "Blade" natif dans les pro
 
 ### A. Création du projet
 
+Pour créer un projet avec des messages d'erreur en français, cela est possible en ajoutant le dossier "fr" dans le répertoire "ressources/lang/"
+Il faut ensuite modifier le fichier "app.php" situé "app/config"
+
 #### 1 - En invite de commande
 
 1. Création du projet avec ou sans authentification (--auth)
@@ -593,7 +596,7 @@ php artisan make:controller AccountController
 
 3. Création de la route (permet l'accès à l'url)
    --> A suivre ...
-    <hr>
+     <hr>
 
 ### Intégration de Seeders (fausse données)
 
