@@ -33,6 +33,9 @@
                         <a href="{{ route('profil.follow', $user->pseudo)}}" class="btn btn-primary btn-lg"
                             role="button" aria-pressed="true">Follow</a>
 
+                        <a href="{{ route('profil.unfollow', $user->pseudo)}}" class="btn btn-info btn-lg" role="button"
+                            aria-pressed="true">Unfollow</a>
+
                         @endif
 
                     </div>

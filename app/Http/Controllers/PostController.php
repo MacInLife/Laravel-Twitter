@@ -23,6 +23,7 @@ class PostController extends Controller
         //dd(Auth::user()->following()->pluck('follower_id'));
         $posts = $post
         ->whereIn('user_id', Auth::user()->following()->pluck('follower_id'))
+        ->orWhere('user_id', Auth::user()->id)
         ->with('user')
         ->orderBy('id', 'DESC')
         ->paginate(4);
