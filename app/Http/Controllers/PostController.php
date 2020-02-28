@@ -18,16 +18,18 @@ class PostController extends Controller
     {
         //Post de tout le monde
         //$posts = $post->orderBy('id', 'DESC')->where('user_id', Auth::user()->id)->paginate(4);
+
         //Post de la personne connecter + des gens que je suis
+        //dd(Auth::user()->following()->pluck('follower_id'));
         $posts = $post
-        ->whereIn('user_id', Auth::user()->followers()->pluck('user_id'))
-        ->orWhere('user_id', Auth::user()->id)
+        ->whereIn('user_id', Auth::user()->following()->pluck('follower_id'))
         ->with('user')
         ->orderBy('id', 'DESC')
         ->paginate(4);
 
         //Récupère tous les users
         //$users = $user->orderBy('id', 'DESC')->get();
+
         //Récupère tous les users excepter l'user authentifier et les personnes que je suis
         $users = $user->orderBy('id', 'DESC')->get()->except(Auth::user()->id)->except(Auth::user()->following()->pluck('follower_id')->toArray());
 

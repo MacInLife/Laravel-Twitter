@@ -29,7 +29,10 @@
                     </div>
                     <div class="p-2 my-auto">
                         @if ($user->name != Auth::user()->name)
-                        <a href="#" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Follow</a>
+
+                        <a href="{{ route('profil.follow', $user->pseudo)}}" class="btn btn-primary btn-lg"
+                            role="button" aria-pressed="true">Follow</a>
+
                         @endif
 
                     </div>
@@ -91,7 +94,7 @@
                     @endif
                 </div>
 
-                <!-- Partie Followers = personne que je suis -->
+                <!-- Partie Followers  -->
                 <div class="tab-pane fade bg-white" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     @foreach($user->followers as $follower)
                     @csrf
@@ -118,7 +121,7 @@
                     @endforeach
                 </div>
 
-                <!-- Partie Following = personne qui me suivent -->
+                <!-- Partie Following -->
                 <div class="tab-pane fade bg-white" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     @foreach($user->following as $following)
                     @csrf
@@ -141,8 +144,10 @@
                                 {{$following->pivot->created_at->locale('fr_FR')->diffForHumans()}}</p>
                         </div>
                         <div class="p-2 my-auto">
-                            <a href="#" class="btn btn-info btn-lg text-white" role="button"
-                                aria-pressed="true">UnFollow</a>
+                            @if ($following->name != Auth::user()->name)
+                            <a href="{{ route('profil.unfollow', $following->pseudo)}}"
+                                class="btn btn-info btn-lg text-white" role="button" aria-pressed="true">UnFollow</a>
+                            @endif
                         </div>
                     </div>
                     @endforeach

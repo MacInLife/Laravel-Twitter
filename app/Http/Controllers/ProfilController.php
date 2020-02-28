@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use App\Follow;
 
 class ProfilController extends Controller
 {
@@ -28,27 +29,33 @@ class ProfilController extends Controller
         return view('/profil', ['posts' => $posts, 'myPosts' => $myPosts, 'user' => $user, 'myFollowers' => $myFollowers, 'myFollowing' => $myFollowing ]);
     }
 
-    public function unFollow($pseudo, User $user, Request $request)
+    public function unFollow($pseudo, Follow $follow, User $user)
     {
-    //     $p = $post->find($id);
-    //    // $p->user_id = $request->user_id;
-    //    if (Auth::check()) {
-    //     $p->delete($id);
-    //     return redirect::back()->withOk("Le post " . $p->text . " a été supprimé.");
-    //     //->withOk("Le post " . $p->text . " a été supprimé.");
-    //     }
+        $user_id = Auth::user()->id;
+        $follower = $user->where('pseudo', $pseudo)->first();
+
+        //where == request
+        $unfollow = $follow
+            ->where('user_id', $user_id)
+            ->where('follower_id', $follower->id)
+            ->first();
+
+        $unfollow->delete();
+
+        return redirect()->back()->withOk("Vous ne suivez plus " . $follower->pseudo . " !");
     }
-    public function followers($pseudo, User $user, Request $request)
+
+
+    public function follow($pseudo, User $user)
     {
-        // $user = $user->where('pseudo', $pseudo)->first();
-        // //Création de la relation suivre un user
-         //$follow = new Follow;
-        // //$follow->user_id = 3;
-        // $follow->user_id = $request->user_id;
-        // //dd($follow);
-        // //Sauvegarde de la relation
-        // $follow->save();
-        // //Redirection
-        // return redirect::back()->withOk("Vous suivez désormais" . $follow->user->name . "!");
+        $user_id = Auth::user()->id;
+        $follower = $user->where('pseudo', $pseudo)->first();
+
+        $follow = new Follow;
+        $follow->user_id = $user_id;   
+        $follow->follower_id = $follower->id;   
+        $follow->save();
+
+        return redirect()->back()->withOk("Vous suivez désormais " . $follower->pseudo . " !");
     }
 }

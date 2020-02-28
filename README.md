@@ -252,7 +252,7 @@ return Validator::make(\$data, [
 
 ```
 
-#### 4. Modification du Modèle "Users.php"
+#### 4. Modification du Modèle "User.php"
 
 -   Modification de la variable \$fillable avec 'avatar'+'pseudo' :
 
