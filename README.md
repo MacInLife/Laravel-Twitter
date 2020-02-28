@@ -351,15 +351,17 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 
 -   Dans un premier temps, il faut crée un vue qui accueillera le formulaire de modification disponible par l'utilisateur.
 
-    Ce modèle de vue est une extension du modèle de vue de base de LARAVEL (style visuel). Nous rappelons donc dans nos fichiers de vue le template permettant de récupérer le même stlye sur chaque page. Cela évite également la répétition du code en ce qui concerne le HTML, le HEAD, le BODY et le MAIN grace au balisage suivantes :
+        Ce modèle de vue est une extension du modèle de vue de base de LARAVEL (style visuel). Nous rappelons donc dans nos fichiers de vue le template permettant de récupérer le même stlye sur chaque page. Cela évite également la répétition du code en ce qui concerne le HTML, le HEAD, le BODY et le MAIN grace au balisage suivantes :
 
-    -   Appel du template avec HTML, HEAD, BODY : `@extends('layouts.app')`
+        -   Appel du template avec HTML, HEAD, BODY : `@extends('layouts.app')`
 
-    -   Appel du conteneur MAIN : `@section('content')`
+        -   Appel du conteneur MAIN : `@section('content')`
 
-    *   Cette balise est bien sûre à fermer en fin de page par ``@endsection`tout comme pour annoncer la fermeture du MAIN.
+        *   Cette balise est bien sûre à fermer en fin de page par ```@endsection```
 
-    Pour cela, crée un fichier appelé "account.blade.php" dans le dossier "/views" et y appelé les balises nécéssaire.
+    tout comme pour annoncer la fermeture du MAIN.
+
+        Pour cela, crée un fichier appelé "account.blade.php" dans le dossier "/views" et y appelé les balises nécéssaire.
 
 <details>
 
@@ -596,15 +598,99 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 
 ```
 
-php artisan make:controller AccountController
+php artisan make:controller AccountController -r
 
 ```
+
+On demande à LARAVEL de créer un controlleur pour gérer les données de la vue, le "-r" permet de créer ce fichier avec les ressources précharger (function index(), voir(), créer(), modifier(), supprimer() etc...)
+
+<details>
+<summary>Code AccountController</summary>
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+
+class AccountController extends Controller
+{
+    //
+    public function show()
+    {
+        return view('account', ['user' => Auth::user()] );
+    }
+
+    public function account(){
+        return view('account', array('user' => Auth::user()) );
+    }
+
+    public function update(User $user){
+
+        $request = app('request');
+        $path = null;
+
+        // Logic for user upload of avatar
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            $path = '/uploads/avatars/' . $filename;
+            Image::make($avatar)->resize(100, 100)->save(public_path($path));
+            //$user = $user->find($id);
+        // $id = Auth::id();
+            $user = Auth::user();
+            $user->avatar = $path;
+            $user->save();
+        }else if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            $path = '/uploads/avatars/' . $filename;
+            Image::make($avatar)->resize(100, 100)->save(public_path($path));
+            //$user = $user->find($id);
+        // $id = Auth::id();
+            $user = Auth::user();
+            $user->avatar = $path;
+            $user->name = $request->name;
+            $user->pseudo = $request->pseudo;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }else{
+            $user = Auth::user();
+            $user->name = $request->name;
+            $user->pseudo = $request->pseudo;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
+
+        return redirect('/account')->withOk("L'utilisateur " . $user->name . " a été modifié.");
+    }
+
+    public function destroy($id, User $user)
+    {
+    //
+    $u = $user->find($id);
+    $u->delete($id);
+    return redirect('/')->withOk("L'utilisateur " . $u->name . " a été supprimé.");
+    //->withOk("L'utilisation'" . $u->name . " a été supprimé.");
+    }
+}
+
+```
+
+</details>
 
 --> A suivre ...
 
 3. Création de la route (permet l'accès à l'url)
    --> A suivre ...
-       <hr>
+    <hr>
 
 ### Intégration de Seeders (fausse données)
 

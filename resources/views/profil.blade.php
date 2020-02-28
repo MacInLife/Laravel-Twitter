@@ -28,7 +28,10 @@
                             {{$user->created_at->locale('fr_FR')->diffForHumans()}}</p>
                     </div>
                     <div class="p-2 my-auto">
+                        @if ($user->name != Auth::user()->name)
                         <a href="#" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Follow</a>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -110,10 +113,7 @@
                             <p class="text-secondary font-italic">Relation crée
                                 {{$follower->pivot->created_at->locale('fr_FR')->diffForHumans()}}</p>
                         </div>
-                        <div class="p-2 my-auto">
-                            <a href="#" class="btn btn-info btn-lg text-white" role="button"
-                                aria-pressed="true">UnFollow</a>
-                        </div>
+
                     </div>
                     @endforeach
                 </div>
@@ -139,6 +139,10 @@
                             </a>
                             <p class="text-secondary font-italic">Relation crée
                                 {{$following->pivot->created_at->locale('fr_FR')->diffForHumans()}}</p>
+                        </div>
+                        <div class="p-2 my-auto">
+                            <a href="#" class="btn btn-info btn-lg text-white" role="button"
+                                aria-pressed="true">UnFollow</a>
                         </div>
                     </div>
                     @endforeach
