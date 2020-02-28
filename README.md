@@ -67,6 +67,12 @@ En cliquant sur le nom d'un utilisateur, vous avez la possibilité de voir son p
 
 ## Guide Technique
 
+Dans ce projet nous avons utilisés le CDN Bootstrap pour gérer le style de nos pages, ainsi que du jquery/javascript utilisé pour certains affichages.
+Pour nos fichiers de vue coder en PHP, nous utilisons "Blade" natif dans les projets LARAVEL.
+
+-   Définitiion de Blade :
+    Blade est le moteur de modélisation simple mais puissant fourni avec Laravel. Contrairement à d'autres moteurs de modèles PHP populaires, Blade ne vous empêche pas d'utiliser du code PHP simple dans vos vues. En fait, toutes les vues Blade sont compilées en code PHP brut et mises en cache jusqu'à ce qu'elles soient modifiées, ce qui signifie que Blade n'ajoute pratiquement pas de surcharge à votre application. Les fichiers de vue de lame utilisent l' extension de fichier et sont généralement stockés dans le répertoire '''..blade.phpresources/views'''
+
 ### Création du projet
 
 #### - En invite de commande
@@ -101,7 +107,7 @@ ex par défault: **http://127.0.0.1:8000**
 
 #### - Intégration Base de Données
 
-3. Créer une BDD vide dans phpMyAdmin (MAMP ou autres)
+3. Créer une BDD vide dans phpMyAdmin (MAMP ou autres).
    Lui donner le nom du projet exemple "laravel-twitter"
 
 4. Modifier le ".env" du projet en conséquences
@@ -128,7 +134,7 @@ Si dans votre BDD, vous pouvez voir les utilisateurs crée, c'est que la connexi
 
 **_`Attention à chaque modification du fichier ".env", il faut relancer le serveur !`_**
 
-### Modification du système d'authentification de base de LARAVEL
+### Modification du système d'authentification (user) de base de LARAVEL
 
 #### 1. Modification de la migration
 
@@ -297,6 +303,237 @@ Un utilisateur peut désormais être crée avec un avatar et un pseudonyme !
          }
          return $this->avatar;
     }
+```
+
+### Ajout de la possibilité de modifier le compte Utilisateur du système d'authentification (user) de base de LARAVEL
+
+C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, pseudo, mail, password, etc..)
+
+1. Création de la vue
+   Dans un premier temps, il faut crée un vue qui accueillera le formulaire de modification disponible par l'utilisateur.
+
+    Ce modèle de vue est une extension du modèle de vue de base de LARAVEL (style visuel). Nous rappelons donc dans nos fichiers de vue le template permettant de récupérer le même stlye sur chaque page. Cela évite également la répétition du code en ce qui concerne le HTML, le HEAD, le BODY et le MAIN grace au balisage suivantes :
+
+    1. Appel du template avec HTML, HEAD, BODY : ``@extends('layouts.app')`
+
+    2. Appel du conteneur MAIN : `@section('content')`
+
+    - Cette balise est bien sûre à fermer en fin de page par ``@endsection`tout comme pour annoncer la fermeture du MAIN.
+
+    Pour cela, crée un fichier appelé "account.blade.php" dans le dossier "/views" et y appelé les balises nécéssaire.
+
+    - Exemple :
+
+```
+@extends('layouts.app')
+<title>Twitter Laravel</title>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            @if(session()->has('ok'))
+            <div class="alert alert-success alert-dismissible">{!! session('ok') !!}</div>
+            @endif
+            <div class="card mb-2">
+                <div class="card-header">Gestion du compte</div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('account.update', $user->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <!-- Changement d'état de l'avatar de base à l'upload -->
+                        <div class="mx-auto mb-2" style="width:80px; height:80px;"><img id="user-avatar"
+                                class="m-auto rounded img-thumbnail" src="{{Auth::user()->getAvatar()}}" width="100%"
+                                height="100%">
+                        </div>
+                        <!-- Ajout de l'avatar -->
+                        <div class="form-group row">
+                            <label for="avatar" class="col-md-4 col-form-label text-md-right">{{ __('Avatar') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="file" id="avatar"
+                                    class="form-control @error('avatar') is-invalid @enderror" name="avatar"
+                                    accept="image/png, image/jpeg" value="{{ old('avatar') }}" autocomplete="avatar"
+                                    autofocus onclick="changeImage();" value="">
+
+                                @error('nom')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <!-- Fin ajout de l'avatar -->
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                    name="name" value="{{Auth::user()->name}}" required autocomplete="name" autofocus>
+
+                                @error('nom')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="pseudo" class="col-md-4 col-form-label text-md-right">{{ __('Pseudo') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="pseudo" type="text"
+                                    class="form-control @error('pseudo') is-invalid @enderror" name="pseudo"
+                                    value="{{Auth::user()->pseudo}}" required autocomplete="pseudo" autofocus>
+
+                                @error('pseudo')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Adresse e-mail') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{Auth::user()->email}}" required autocomplete="email">
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    autocomplete="new-password">
+                                <!-- Bouton masquer/afficher mot de passe -->
+                                <button class="theMask" type="button" onclick="unmask()"
+                                    title="Mask/Unmask password to check content">&#128065;</button>
+                                <div id="traitDiag"></div>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Confimation du mot de passe') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control"
+                                    name="password_confirmation" autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __("Enregister les modifications") }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Suppression définitive de votre compte</div>
+                <div class="card-body">
+                    <form action="{{ route('account.destroy', $user->id) }}" method="DELETE">
+                        @csrf
+                        <!-- method('DELETE') -->
+                        <div class="border-bottom mb-2 pb-2">
+
+                            <p>Après avoir validé la suppression de votre compte, vous n'aurez plus accès à celui-ci,
+                                ainsi qu'à vos tweets, followers, etc... <span>Vous serez alors rediriger sur notre page
+                                    d'accueil !</span></p>
+                            <button type="submit" class="btn btn-outline-danger p-2 btn-lg btn-block" onclick="if(confirm('Voulez-vous vraiment supprimer votre compte ?')){
+                                            return true;}else{ return false;}">Supprimer mon
+                                compte</button>
+
+                        </div>
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+```
+
+-   Ajout de code JQUERY pour permettre l'affichage dynamique de la vision du mot de passe
+
+```
+<script>
+    function unmask() {
+        var inputType = document.getElementById('password');
+        var x = document.getElementById("traitDiag");
+        if (inputType.type === "password") {
+            document.getElementById('password').type = "text";
+            x.style.display = "none";
+
+        } else {
+            document.getElementById('password').type = "password";
+            x.style.display = "block";
+        }
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+```
+
+-   Intégration du style spécifique au champs mot de passe
+
+```
+<style>
+    .theMask {
+        border: none;
+        position: absolute;
+        right: 1.5px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        filter: grayscale(80%);
+    }
+
+    #traitDiag {
+        right: 25px;
+        top: 45%;
+        border: 1px solid red;
+        width: 22px;
+        position: absolute;
+        border-radius: 22%;
+        transform: rotate(-45deg);
+        display: block;
+    }
+
+    #avatar {
+        border: none;
+    }
+</style>
+
+```
+
+2. Création du controller & Gestion de la vue dans le Controller
+   Pour créer le controller, il faut taper la commande suivante :
+
+```
+php artisan make:controller AccountController
 ```
 
 ### Intégration de Seeders (fausse données)
