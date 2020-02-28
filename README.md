@@ -691,7 +691,8 @@ class AccountController extends Controller
 
 -   Ajouter les lignes suivantes :
 
-**//Route de la gestion du compte**
+**//Route de la gestion du compte**</br>
+
 **//Route de vision du compte**
 
 ```
