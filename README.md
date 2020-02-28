@@ -330,10 +330,10 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 
     Pour cela, crée un fichier appelé "account.blade.php" dans le dossier "/views" et y appelé les balises nécéssaire.
 
-<détails>
+<details>
 
-<summary> Cliquez ici pour voir l'exemple </summary>
-<code style="white-space:nowrap;">
+<summary>Cliquez ici pour voir l'exemple </summary>
+
 ```
 @extends('layouts.app')
 <title>Twitter Laravel</title>
@@ -487,11 +487,11 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 </div>
 
 @endsection
+```
 
-</code>
 </details>
 
-<détails>
+<details>
 
   <summary> Code JQUERY lié </summary>
 
@@ -519,7 +519,7 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 
 </details>
 
-<détails>
+<details>
 
   <summary> Code du style lié </summary>
 
