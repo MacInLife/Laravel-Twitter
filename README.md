@@ -82,15 +82,15 @@ Pour nos fichiers de vue coder en PHP, nous utilisons "Blade" natif dans les pro
     laravel new nom_du_projet --auth
     ```
 2. Intégration complète de Bootstrap au projet sans lien CDN
-    1. Installation du composant Bootstrap
+    - Installation du composant Bootstrap
         ```
         composer require laravel/ui --dev
         ```
-    2. Intégration du composants dans le projet
+    - Intégration du composants dans le projet
         ```
         php artisan ui bootstrap --auth
         ```
-    3. Mise à jour des fichiers crée avec l'intégration des class de Bootstrap
+    - Mise à jour des fichiers crée avec l'intégration des class de Bootstrap
         ```
         npm install && npm run dev
         ```
@@ -107,10 +107,10 @@ ex par défault: **http://127.0.0.1:8000**
 
 #### 2 - Intégration Base de Données
 
-3. Créer une BDD vide dans phpMyAdmin (MAMP ou autres).
-   Lui donner le nom du projet exemple "laravel-twitter"
+-   Créer une BDD vide dans phpMyAdmin (MAMP ou autres).
+    Lui donner le nom du projet exemple "laravel-twitter"
 
-4. Modifier le ".env" du projet en conséquences
+-   Modifier le ".env" du projet en conséquences
 
     1. Faire correspondre les données suivantes entre MySQL et votre projet
 
@@ -142,46 +142,47 @@ La migration se situe dans le dossier "database" puis "migrations"
 
 -   Nom de la migration : année_mois_jour_000000_create_users_table.php
 -   État par défault :
-    <details>
 
+<details>
+<summary>Voir</summary>
 ```
-<?php
+    <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+    use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    class CreateUsersTable extends Migration
+    {
+    \*\*
+    _ Run the migrations.
+    _
+    _ @return void
+    _/
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+    Schema::create('users', function (Blueprint $table) {
+                $table->bigIncrements('id');
+    $table->string('name');
+                $table->string('email')->unique();
+    $table->timestamp('email_verified_at')->nullable();
+                $table->string('password');
+    $table->rememberToken();
+                $table->timestamps();
+    });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('users');
+        /**
+        * Reverse the migrations.
+        *
+        * @return void
+        */
+        public function down()
+        {
+            Schema::dropIfExists('users');
+        }
+
     }
-}
-```
 
 </details>
 
@@ -189,13 +190,13 @@ class CreateUsersTable extends Migration
     Le Schema de la function up() correspond aux attributs de la table "Users" de la BDD.
     Il suffit donc de lui ajouter nos nouveaux attribut, ici nous avons besoin d'un avatar, ainsi qu'un pseudonyme pour l'utlisateur.
 
-    1. L'avatar peut être nulle car non obligatoire à la création d'un compte
+    -   L'avatar peut être nulle car non obligatoire à la création d'un compte
 
     ```
        $table->string('avatar')->nullable();
     ```
 
-    2. Le pseudonyme lui doit être unique car il ne peut exister 2 utilisateurs avec le même pseudonyme sous peine de conflit.
+    -   Le pseudonyme lui doit être unique car il ne peut exister 2 utilisateurs avec le même pseudonyme sous peine de conflit.
 
     ```
        $table->string('pseudo')->unique();
@@ -219,6 +220,7 @@ class CreateUsersTable extends Migration
 -   Dans la méthode create : Ajout de la ligne 'avatar' et 'pseudo'
 
 ```
+
      return User::create([
             'avatar' => $path,
             'name' => $data['name'],
@@ -226,17 +228,20 @@ class CreateUsersTable extends Migration
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
 ```
 
 -   Dans la fonction validator : Ajout de la ligne 'pseudo'
 
 ```
-   return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'pseudo' => ['required', 'string', 'alpha_num', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+
+return Validator::make(\$data, [
+'name' => ['required', 'string', 'max:255'],
+'pseudo' => ['required', 'string', 'alpha_num', 'unique:users'],
+'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+'password' => ['required', 'string', 'min:8', 'confirmed'],
+]);
+
 ```
 
 #### 4. Modification du Modèle "Users.php"
@@ -244,9 +249,11 @@ class CreateUsersTable extends Migration
 -   Modification de la variable \$fillable avec 'avatar'+'pseudo' :
 
 ```
-  protected $fillable = [
-        'avatar','name','pseudo', 'email', 'password',
-    ];
+
+protected \$fillable = [
+'avatar','name','pseudo', 'email', 'password',
+];
+
 ```
 
 #### 5. Modification de la vue (views/auth) "register.blade.php"
@@ -255,11 +262,14 @@ class CreateUsersTable extends Migration
 
 1. d'un label : ex("avatar");
 2. d'un champs de saisie (input) de type text pour le pseudo et de type file pour l'avatar;
+
     <details>
     <summary>Voir le code</summary>
 
 ```
+
 <!-- Ajout de l'avatar -->
+
                         <div class="form-group row">
                             <label for="avatar" class="col-md-4 col-form-label text-md-right">{{ __('Avatar') }}</label>
 
@@ -277,6 +287,7 @@ class CreateUsersTable extends Migration
                             </div>
                         </div>
                         <!-- Fin ajout de l'avatar -->
+
 ```
 
 ![docs/HTMLformPseudo.png](docs/HTMLformPseudo.png)
@@ -290,6 +301,7 @@ Un utilisateur peut désormais être crée avec un avatar et un pseudonyme !
 -   Dans le controller "RegisterController", ajouter ceci à la fonction create :
 
 ```
+
     $request = app('request');
         $path = null;
 
@@ -299,17 +311,20 @@ Un utilisateur peut désormais être crée avec un avatar et un pseudonyme !
             $path = '/uploads/avatars/' . $filename;
             Image::make($avatar)->resize(100, 100)->save(public_path($path));
         }
+
 ```
 
 -   Dans le modèle "User.php", créer une fonction pour récuperer l'avatar
 
 ```
-  public function getAvatar() {
-         if (!$this->avatar) {
+
+public function getAvatar() {
+if (!$this->avatar) {
              return '/img/avatar.png';
          }
          return $this->avatar;
-    }
+}
+
 ```
 
 ### C. Ajout de la possibilité de modifier le compte Utilisateur du système d'authentification (user) de base de LARAVEL
@@ -322,11 +337,11 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 
     Ce modèle de vue est une extension du modèle de vue de base de LARAVEL (style visuel). Nous rappelons donc dans nos fichiers de vue le template permettant de récupérer le même stlye sur chaque page. Cela évite également la répétition du code en ce qui concerne le HTML, le HEAD, le BODY et le MAIN grace au balisage suivantes :
 
-    1. Appel du template avec HTML, HEAD, BODY : `@extends('layouts.app')`
+    -   Appel du template avec HTML, HEAD, BODY : `@extends('layouts.app')`
 
-    2. Appel du conteneur MAIN : `@section('content')`
+    -   Appel du conteneur MAIN : `@section('content')`
 
-    -   Cette balise est bien sûre à fermer en fin de page par ``@endsection`tout comme pour annoncer la fermeture du MAIN.
+    *   Cette balise est bien sûre à fermer en fin de page par ``@endsection`tout comme pour annoncer la fermeture du MAIN.
 
     Pour cela, crée un fichier appelé "account.blade.php" dans le dossier "/views" et y appelé les balises nécéssaire.
 
@@ -335,7 +350,9 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 <summary>Cliquez ici pour voir l'exemple </summary>
 
 ```
+
 @extends('layouts.app')
+
 <title>Twitter Laravel</title>
 @section('content')
 <div class="container">
@@ -487,6 +504,7 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 </div>
 
 @endsection
+
 ```
 
 </details>
@@ -667,3 +685,7 @@ Laravel est un framework d'application web avec une syntaxe expressive et élég
 -   [Diffusion d'événements en temps réel](https://laravel.com/docs/broadcasting).
 
 Laravel est accessible, puissant et fournit les outils requis pour les grandes applications robustes
+
+```
+
+```
