@@ -310,19 +310,22 @@ Un utilisateur peut désormais être crée avec un avatar et un pseudonyme !
 C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, pseudo, mail, password, etc..)
 
 1. Création de la vue
-   Dans un premier temps, il faut crée un vue qui accueillera le formulaire de modification disponible par l'utilisateur.
+
+-   Dans un premier temps, il faut crée un vue qui accueillera le formulaire de modification disponible par l'utilisateur.
 
     Ce modèle de vue est une extension du modèle de vue de base de LARAVEL (style visuel). Nous rappelons donc dans nos fichiers de vue le template permettant de récupérer le même stlye sur chaque page. Cela évite également la répétition du code en ce qui concerne le HTML, le HEAD, le BODY et le MAIN grace au balisage suivantes :
 
-    1. Appel du template avec HTML, HEAD, BODY : ``@extends('layouts.app')`
+    1. Appel du template avec HTML, HEAD, BODY : `@extends('layouts.app')`
 
     2. Appel du conteneur MAIN : `@section('content')`
 
-    - Cette balise est bien sûre à fermer en fin de page par ``@endsection`tout comme pour annoncer la fermeture du MAIN.
+    -   Cette balise est bien sûre à fermer en fin de page par ``@endsection`tout comme pour annoncer la fermeture du MAIN.
 
     Pour cela, crée un fichier appelé "account.blade.php" dans le dossier "/views" et y appelé les balises nécéssaire.
 
-    - Exemple :
+<détails>
+
+  <summary> Cliquez ici pour voir l'exemple </summary>
 
 ```
 @extends('layouts.app')
@@ -478,6 +481,11 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 @endsection
 ```
 
+</details>
+
+<détails>
+
+  <summary> Code JQUERY lié </summary>
 -   Ajout de code JQUERY pour permettre l'affichage dynamique de la vision du mot de passe
 
 ```
@@ -498,6 +506,10 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 ```
 
+</details>
+<détails>
+
+  <summary> Code du style lié </summary>
 -   Intégration du style spécifique au champs mot de passe
 
 ```
@@ -528,6 +540,8 @@ C'est-à-dire de pouvoir modifier son compte après la création (avatar, name, 
 </style>
 
 ```
+
+</details>
 
 2. Création du controller & Gestion de la vue dans le Controller
    Pour créer le controller, il faut taper la commande suivante :
