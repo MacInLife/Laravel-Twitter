@@ -686,11 +686,31 @@ class AccountController extends Controller
 
 </details>
 
---> A suivre ...
-
 3. Création de la route (permet l'accès à l'url)
-   --> A suivre ...
-    <hr>
+   Ce fichier se situe dans le dossier "routes/web.php"
+
+-   Ajouter les lignes suivantes :
+
+**//Route de la gestion du compte**
+**//Route de vision du compte**
+
+```
+Route::get('account', 'AccountController@show')->middleware('auth')->name('account');
+```
+
+**//Route d'update du compte**
+
+```
+Route::post('account/{id}', 'AccountController@update')->middleware('auth')->name('account.update');
+```
+
+**//Route de la méthode delete account**
+
+```
+Route::get('/account/{id}', 'AccountController@destroy')->middleware('auth')->name('account.destroy');
+```
+
+<hr>
 
 ### Intégration de Seeders (fausse données)
 
