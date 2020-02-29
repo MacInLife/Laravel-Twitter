@@ -12,7 +12,7 @@ use App\Follow;
 class ProfilController extends Controller
 {
     //
-    public function index($pseudo, Post $post, Request $request, User $user)
+    public function index($pseudo, Post $post, Follow $follow, User $user)
     {
         //
         $posts = $post->orderBy('id', 'DESC')->get();
@@ -25,6 +25,7 @@ class ProfilController extends Controller
         $myFollowing = $user->following()->get();
         $myFollowers = $user->followers()->get();
 
+        
         //Retourne la view des posts
         return view('/profil', ['posts' => $posts, 'myPosts' => $myPosts, 'user' => $user, 'myFollowers' => $myFollowers, 'myFollowing' => $myFollowing ]);
     }

@@ -29,13 +29,13 @@
                     </div>
                     <div class="p-2 my-auto">
                         @if ($user->name != Auth::user()->name)
-
+                        @if($user->id)
                         <a href="{{ route('profil.follow', $user->pseudo)}}" class="btn btn-primary btn-lg"
                             role="button" aria-pressed="true">Follow</a>
-
-                        <a href="{{ route('profil.unfollow', $user->pseudo)}}" class="btn btn-info btn-lg" role="button"
-                            aria-pressed="true">Unfollow</a>
-
+                        @else
+                        <a href="{{ route('profil.unfollow', $user->pseudo)}}" class="btn btn-dark btn-lg text-white"
+                            role="button" aria-pressed="true">Unfollow</a>
+                        @endif
                         @endif
 
                     </div>
@@ -99,25 +99,25 @@
 
                 <!-- Partie Followers  -->
                 <div class="tab-pane fade bg-white" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    @foreach($user->followers as $follower)
+                    @foreach($user->followers as $myFollowers)
                     @csrf
                     <div class="card-body d-flex p-0 py-2">
                         <div class="mr-2 float-left" style="width:80px;">
-                            <a href="{{ route('profil', $follower->pseudo) }}">
+                            <a href="{{ route('profil', $myFollowers->pseudo) }}">
                                 <img id="user-avatar" class="m-auto rounded img-thumbnail"
-                                    src="{{$follower->getAvatar()}}" width="100%" height="100%">
+                                    src="{{$myFollowers->getAvatar()}}" width="100%" height="100%">
                             </a>
                         </div>
                         <div class="p-2 my-auto mr-auto">
-                            <a href="{{ route('profil', $follower->pseudo) }}" class="my-auto mr-auto"
+                            <a href="{{ route('profil', $myFollowers->pseudo) }}" class="my-auto mr-auto"
                                 style="text-decoration: none; color: inherit;">
                                 <div class="d-flex">
-                                    <H5 class="font-weight-bold pr-2"> {{ $follower->name }} </H5>
-                                    <p>{{$follower->pseudo}}</p>
+                                    <H5 class="font-weight-bold pr-2"> {{ $myFollowers->name }} </H5>
+                                    <p>{{$myFollowers->pseudo}}</p>
                                 </div>
                             </a>
                             <p class="text-secondary font-italic">Relation crée
-                                {{$follower->pivot->created_at->locale('fr_FR')->diffForHumans()}}</p>
+                                {{$myFollowers->pivot->created_at->locale('fr_FR')->diffForHumans()}}</p>
                         </div>
 
                     </div>
@@ -149,7 +149,7 @@
                         <div class="p-2 my-auto">
                             @if ($following->name != Auth::user()->name)
                             <a href="{{ route('profil.unfollow', $following->pseudo)}}"
-                                class="btn btn-info btn-lg text-white" role="button" aria-pressed="true">UnFollow</a>
+                                class="btn btn-dark btn-lg text-white" role="button" aria-pressed="true">UnFollow</a>
                             @endif
                         </div>
                     </div>
