@@ -26,7 +26,7 @@
                     <div class="collapse navbar-collapse bg-white p-2" id="navbarSupportedContent">
                         <div class="content p-2">
                             @foreach ($users as $user)
-
+                            @if ($user != Auth::user())
                             <div class="card-body d-flex p-2">
 
                                 <div class="mr-2 float-left" style="width:80px;">
@@ -43,11 +43,17 @@
                                     </div>
                                 </a>
                                 <div class="p-2 my-auto ">
-                                    <a href="#" class="btn btn-primary btn-lg" role="button"
-                                        aria-pressed="true">Follow</a>
+                                    @if($users == true)
+                                    <a href="{{ route('profil.follow', $user->pseudo)}}" class="btn btn-primary btn-lg"
+                                        role="button" aria-pressed="true">Follow</a>
+                                    @else
+                                    <a href="{{ route('profil.unfollow', $user->pseudo)}}"
+                                        class="btn btn-dark btn-lg text-white" role="button"
+                                        aria-pressed="true">Unfollow</a>
+                                    @endif
                                 </div>
                             </div>
-
+                            @endif
                             @endforeach
                         </div>
                     </div>

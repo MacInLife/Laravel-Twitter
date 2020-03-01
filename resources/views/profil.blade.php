@@ -29,7 +29,7 @@
                     </div>
                     <div class="p-2 my-auto">
                         @if ($user->name != Auth::user()->name)
-                        @if($user->id)
+                        @if($isfollow == false)
                         <a href="{{ route('profil.follow', $user->pseudo)}}" class="btn btn-primary btn-lg"
                             role="button" aria-pressed="true">Follow</a>
                         @else
@@ -146,12 +146,7 @@
                             <p class="text-secondary font-italic">Relation crée
                                 {{$following->pivot->created_at->locale('fr_FR')->diffForHumans()}}</p>
                         </div>
-                        <div class="p-2 my-auto">
-                            @if ($following->name != Auth::user()->name)
-                            <a href="{{ route('profil.unfollow', $following->pseudo)}}"
-                                class="btn btn-dark btn-lg text-white" role="button" aria-pressed="true">UnFollow</a>
-                            @endif
-                        </div>
+
                     </div>
                     @endforeach
                 </div>

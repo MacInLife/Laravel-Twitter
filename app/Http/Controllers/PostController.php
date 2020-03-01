@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
+use App\Follow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -14,7 +15,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $post, User $user)
+    public function index( Post $post, User $user, Follow $follow)
     {
         //Post de tout le monde
         //$posts = $post->orderBy('id', 'DESC')->where('user_id', Auth::user()->id)->paginate(4);
@@ -33,8 +34,15 @@ class PostController extends Controller
         //Récupère tous les users excepter l'user authentifier et les personnes que je suis
         $users = $user->orderBy('id', 'DESC')->get()->except(Auth::user()->id)->except(Auth::user()->following()->pluck('follower_id')->toArray());
 
+        // $user_id = Auth::user()->id;
+        // $follower = $user->where('pseudo', $pseudo)->first();
+        // $isfollow = $follow
+        // ->where('user_id', $user_id)
+        // ->where('follower_id', $follower->id)
+        // ->first();
+
         //Retourne la view des posts
-        return view('home', ['posts' => $posts], ['users' => $users]);
+        return view('home', ['posts' => $posts , 'users' => $users ]);
     }
 
     /**

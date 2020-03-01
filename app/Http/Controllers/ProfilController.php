@@ -25,9 +25,16 @@ class ProfilController extends Controller
         $myFollowing = $user->following()->get();
         $myFollowers = $user->followers()->get();
 
+
+        $user_id = Auth::user()->id;
+        $follower = $user->where('pseudo', $pseudo)->first();
+        $isfollow = $follow
+        ->where('user_id', $user_id)
+        ->where('follower_id', $follower->id)
+        ->first();
         
         //Retourne la view des posts
-        return view('/profil', ['posts' => $posts, 'myPosts' => $myPosts, 'user' => $user, 'myFollowers' => $myFollowers, 'myFollowing' => $myFollowing ]);
+        return view('/profil', ['posts' => $posts, 'myPosts' => $myPosts, 'user' => $user, 'myFollowers' => $myFollowers, 'myFollowing' => $myFollowing,'isfollow' => $isfollow ]);
     }
 
     public function unFollow($pseudo, Follow $follow, User $user)
