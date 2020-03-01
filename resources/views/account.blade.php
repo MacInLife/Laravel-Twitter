@@ -13,19 +13,15 @@
                     <form method="POST" action="{{ route('account.update', $user->id) }}" enctype="multipart/form-data">
                         @csrf
                         <!-- Changement d'état de l'avatar de base à l'upload -->
-                        <div class="mx-auto mb-2" style="width:80px; height:80px;"><img id="user-avatar"
-                                class="m-auto rounded img-thumbnail" src="{{Auth::user()->getAvatar()}}" width="100%"
-                                height="100%">
+                        <div class="mx-auto mb-2" style="width:80px; height:80px;"><img id="user-avatar" class="m-auto rounded img-thumbnail" src="{{Auth::user()->getAvatar()}}" width="100%" height="100%">
                         </div>
+
                         <!-- Ajout de l'avatar -->
                         <div class="form-group row">
                             <label for="avatar" class="col-md-4 col-form-label text-md-right">{{ __('Avatar') }}</label>
 
                             <div class="col-md-6">
-                                <input type="file" id="avatar"
-                                    class="form-control @error('avatar') is-invalid @enderror" name="avatar"
-                                    accept="image/png, image/jpeg" value="{{ old('avatar') }}" autocomplete="avatar"
-                                    autofocus onclick="changeImage();" value="">
+                                <input type="file" id="avatar" class="form-control @error('avatar') is-invalid @enderror" name="avatar" accept="image/png, image/jpeg" value="{{ old('avatar') }}" autocomplete="avatar" autofocus onclick="changeImage();" value="">
 
                                 @error('nom')
                                 <span class="invalid-feedback" role="alert">
@@ -40,8 +36,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{Auth::user()->name}}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{Auth::user()->name}}" required autocomplete="name" autofocus>
 
                                 @error('nom')
                                 <span class="invalid-feedback" role="alert">
@@ -55,9 +50,7 @@
                             <label for="pseudo" class="col-md-4 col-form-label text-md-right">{{ __('Pseudo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="pseudo" type="text"
-                                    class="form-control @error('pseudo') is-invalid @enderror" name="pseudo"
-                                    value="{{Auth::user()->pseudo}}" required autocomplete="pseudo" autofocus>
+                                <input id="pseudo" type="text" class="form-control @error('pseudo') is-invalid @enderror" name="pseudo" value="{{Auth::user()->pseudo}}" required autocomplete="pseudo" autofocus>
 
                                 @error('pseudo')
                                 <span class="invalid-feedback" role="alert">
@@ -68,12 +61,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Adresse e-mail') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Adresse e-mail') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{Auth::user()->email}}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{Auth::user()->email}}" required autocomplete="email">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -84,16 +75,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
-                                    autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
                                 <!-- Bouton masquer/afficher mot de passe -->
-                                <button class="theMask" type="button" onclick="unmask()"
-                                    title="Mask/Unmask password to check content">&#128065;</button>
+                                <button class="theMask" type="button" onclick="unmask()" title="Mask/Unmask password to check content">&#128065;</button>
                                 <div id="traitDiag"></div>
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -104,12 +91,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Confimation du mot de passe') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confimation du mot de passe') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
 
@@ -173,7 +158,6 @@
             recupImage.setAttribute("src", valeurAttribut);
         s
     }
-
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
@@ -200,5 +184,4 @@
     #avatar {
         border: none;
     }
-
 </style>

@@ -22,7 +22,7 @@ class PostsTableSeeder extends Seeder
          for ($i = 0; $i < 10; $i++) {
              $post = new Post();
              $post->text = $faker->text(20);
-             $post->user_id = $faker->numberBetween(1, 5);
+             $post->user_id = $faker->numberBetween(1, 9);
              $post->save();
          }
     }
