@@ -9,7 +9,7 @@ Application de page unique de type Twitter avec Laravel, avec une chronologie se
 
 ## Grilles des Vues
 
-
+|                                       |                                               |                                     |
 | :-----------------------------------: | :-------------------------------------------: | :---------------------------------: |
 | ![docs/Welcome.jpg](docs/Welcome.jpg) | ![docs/inscription.jpg](docs/inscription.jpg) |  ![docs/login.jpg](docs/login.jpg)  |
 | ![docs/accueil.png](docs/accueil.png) |      ![docs/compte.jpg](docs/compte.jpg)      | ![docs/profil.png](docs/profil.png) |
