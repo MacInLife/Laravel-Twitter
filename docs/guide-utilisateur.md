@@ -1,4 +1,4 @@
-## I - Guide utilisateur
+## I - Guide Utilisateur
 
 ### A. Page de bienvenue
 
@@ -8,16 +8,16 @@
     -   Un bouton d'inscription (S'inscrire)
     -   Un bouton d'identification (S'identifier)
 
-![docs/Welcome.jpg](docs/Welcome.jpg)
+![docs/Welcome.jpg](Welcome.jpg)
 
 ### B. Authentification
 
 -   Modification du système d'authentification de Laravel (inscription, connexion) pour utiliser un nom (name) et un nom d'utilisateur ou pseudo (pseudo) avec ou sans avatar (avatar). Un avatar par défault sera utilisé à la création du compte utilisateur et le pseudo ainsi que l'adresse e-mail est unique.
 
     -   Ex: Avatar - John Do - @johnDo.
-        ![docs/inscription.jpg](docs/inscription.jpg)
+        ![docs/inscription.jpg](inscription.jpg)
 
-        ![docs/login.jpg](docs/login.jpg)
+        ![docs/login.jpg](login.jpg)
 
 ### C. Page d'accueil
 
@@ -34,7 +34,7 @@ Nous pouvons y voir les personnes déjà inscrites et les suivre ou non au besoi
 
 Nous pouvons également poster des tweets, les visualiser et les supprimer.
 
-![docs/accueil.png](docs/accueil.png)
+![docs/accueil.png](accueil.png)
 
 ### D. Page Compte
 
@@ -46,7 +46,7 @@ La page de gestion du compte est disponible dans le menu de navigation comme exp
     **_`Attention cette action est irréversible !`_**
     -   Une fois l'action effectué, vous êtes alors redirigé sur la page de bienvenue de l'application, avec un message vous confirmant la suppression de votre compte.
 
-![docs/compte.jpg](docs/compte.jpg)
+![docs/compte.jpg](compte.jpg)
 
 ### E. Page Profil
 
@@ -59,4 +59,4 @@ Sur celle-ci vous trouverez vos informations de profil :
 
 En cliquant sur le nom d'un utilisateur, vous avez la possibilité de voir son profil.
 
-![docs/profil.png](docs/profil.png)
+![profil.png](profil.png)
