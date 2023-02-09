@@ -365,7 +365,7 @@
         },
         {
             "name": "guzzlehttp/psr7",
-<<<<<<< HEAD
+
             "version": "2.2.1",
             "source": {
                 "type": "git",
@@ -376,7 +376,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/psr7/zipball/c94a94f120803a18554c1805ef2e539f8285f9a2",
                 "reference": "c94a94f120803a18554c1805ef2e539f8285f9a2",
-=======
+
             "version": "2.4.3",
             "source": {
                 "type": "git",
@@ -387,7 +387,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guzzle/psr7/zipball/67c26b443f348a51926030c83481b85718457d3d",
                 "reference": "67c26b443f348a51926030c83481b85718457d3d",
->>>>>>> 78596c2 (maj nyc)
+
                 "shasum": ""
             },
             "require": {
@@ -415,11 +415,11 @@
                     "forward-command": false
                 },
                 "branch-alias": {
-<<<<<<< HEAD
-                    "dev-master": "2.2-dev"
-=======
+
+                    "dev-master": "2.2-dev",
+
                     "dev-master": "2.4-dev"
->>>>>>> 78596c2 (maj nyc)
+
                 }
             },
             "autoload": {
@@ -481,11 +481,10 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/guzzle/psr7/tree/2.2.1"
-=======
+
+                "source": "https://github.com/guzzle/psr7/tree/2.2.1",
                 "source": "https://github.com/guzzle/psr7/tree/2.4.3"
->>>>>>> 78596c2 (maj nyc)
+
             },
             "funding": [
                 {
@@ -500,14 +499,11 @@
                     "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/psr7",
                     "type": "tidelift"
                 }
-            ],
-<<<<<<< HEAD
+            ]},
+        
             "time": "2022-03-20T21:55:58+00:00"
-=======
-            "time": "2022-10-26T14:07:24+00:00"
->>>>>>> 78596c2 (maj nyc)
         },
-        {
+        { 
             "name": "intervention/image",
             "version": "2.7.2",
             "source": {
